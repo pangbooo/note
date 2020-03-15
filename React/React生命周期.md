@@ -21,12 +21,14 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 * static getDerivedStateFromProps(props,state) / ~~UNSFFE_componentWillMount~~ 
 * render
 * componentDidMount
+<br/>
 如果在componentWillMount中setState，组件会更新state，__但只渲染一次__。<br/>
 如果在componentDidMount中setState，组件会在初始化阶段渲染两次。
 
 
 ### 卸载
 * componentWillUnmount
+<br/>
 执行一些清理方法，如事件回收、清除定时器。
 
 ### 更新
@@ -37,7 +39,7 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 * getSnapshotBeforeUpdate()
 * componentDidUpdate()
 
-16.3之前
+16.3之前<br/>
 __自身setState或者调用forUpdate()__
 * shouleComponentUpdate
 * componentWillUpdate
@@ -52,5 +54,5 @@ __new props__
 * componentDidUpdate()
 
 ### 整理流程（16.3之后）
-![常用生命周期](https://github.com/pangbooo/note/blob/master/React/imgs/react-lifecycle-1.PNG)
-![不常用生命周期](https://github.com/pangbooo/note/blob/master/React/imgs/react-lifecycle-2.PNG)
+![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)
+![不常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-2.PNG)
