@@ -16,9 +16,9 @@ __工作流程:__
 对变化部分做批量更新。
 
 __优点:__
-* Virtual DOM提升了React的性能
-* Virtual DOM的渲染方式好于传统的DOM操作
-* react-native集成于其他平台
+- Virtual DOM提升了React的性能
+- Virtual DOM的渲染方式好于传统的DOM操作
+- react-native集成于其他平台
 
 * #### 函数式编程
 > 函数式编程对应声明式编程
