@@ -6,6 +6,6 @@
 
 ### 浏览器
 * #### HTTP
-* #### [cookie](https://wangdoc.com/javascript/bom/cookie.html)
+* #### [Cookie](https://wangdoc.com/javascript/bom/cookie.html)
 * #### 同源政策及其规避方法
 * #### CORS
