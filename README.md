@@ -9,3 +9,4 @@
 * #### [Cookie](https://wangdoc.com/javascript/bom/cookie.html)
 * #### 同源政策及其规避方法
 * #### CORS
+* #### [JWT](https://github.com/pangbooo/note/blob/master/Brower/JWT.md)
