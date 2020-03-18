@@ -1,9 +1,9 @@
 # 1.浏览器同源政策及其规避方法
 https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
-* ### 概念
-* ### Cookie
-* ### iframe
-* ### AJAX
+* #### 概念
+* #### Cookie
+* #### iframe
+* #### AJAX
 
 ### 概念
 1）同源：协议, 域名, 端口 相同
