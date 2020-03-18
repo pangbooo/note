@@ -15,7 +15,16 @@ http://www.example.com/dir/page.html
 - AJAX 请求不能发送
 
 ### Cookie
-...
+Cookie 默认只有同源的网页才可以共享。<br/>
+服务器在浏览器端保存Cookie，Http头设置一个Set-Cookie字段
+
+```javascript
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;Domain=example.com; path=/blog Secure; HttpOnly
+```
+设置Domain=example.com，则exapmle.com和子域名w1.exapmle.com都可以访问cookie
+
 ### iframe
 对于完全不同源的网站，目前有三种方法，可以解决跨域窗口的通信问题。
 - 片段识别符
@@ -31,7 +40,7 @@ http://www.example.com/dir/page.html
 - WebSocket
 - __CORS__
 
-#### JSONP
+#### 1) JSONP
 原理： 网页通过添加一个<script>元素，向服务器请求JSON数据，这种做法不受同源政策限制。                             
       服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。
 ```javascript
