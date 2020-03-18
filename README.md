@@ -7,6 +7,6 @@
 ### 浏览器
 * #### HTTP
 * #### [Cookie](https://wangdoc.com/javascript/bom/cookie.html)
-* #### 同源政策及其规避方法
+* #### 同源政策及其规避方法(https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md)
 * #### CORS
 * #### [JWT](https://github.com/pangbooo/note/blob/master/Brower/JWT.md)
