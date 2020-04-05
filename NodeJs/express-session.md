@@ -12,8 +12,8 @@
     * 2.3 [NodeJs session 连接Memcached](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#nodejs-session-%E8%BF%9E%E6%8E%A5memcached)
     * 2.4 [NodeJs session 储存在cookie中](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#nodejs-session-%E5%82%A8%E5%AD%98%E5%9C%A8cookie%E4%B8%AD)
 * 3.Express Session 的例子
-* 4.在express-session中如何设置和获取session数据
-* 5.在express-session中如何删除session数据
+* 4.[在express-session中如何设置和获取session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#4在express-session中如何设置和获取session数据)
+* 5.[在express-session中如何删除session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md5在express-session中如何删除session数据)
 
 ## 1.Express3 和 Express4的不同点
 * 1) Express核心和中间件的变化。删除了对Connect和内置中间件的依赖，因此您必须自己添加中间件。
@@ -89,6 +89,38 @@ __cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br
 * cookie-session 可以简化某些负载平衡方案。
 * cookie-session 可用于存储“轻量”session,查找数据库支持的辅助存储以减少数据库查找。
 
+## 3.Express Session 的例子
+## 4.在express-session中如何设置和获取session数据
+创建rest 调用来设置session，你可以在之后的调用中使用相同的方法去设置session。
+```javascript
+var sessionData;
+app.get('/set_session', function(req, res){
+  sessionData = req.session;
+  sessionData.user = {};
+  let userName = 'a';
+  sessionData.user.username = userName;
+  sessionData.user.salary = random.int(55,956);
+
+  res.json(sessionData.user);
+})
+
+```
+
+## 5.
+我们将使用express session __destroy（）__ 方法从变量中删除session，找不到会话数据：您将获得错误，否则将发送“成功销毁”消息。
+```javascript
+app.get('destorysession', function(req,res){
+  sessionData = req.session;
+
+  sessionData.destroy(function(err){
+    if(err){
+      res.json('Error destorying session')
+    }else{
+      res.json('Session destroy successfully')
+    }
+  })
+})
+```
 
 
 
@@ -123,8 +155,7 @@ __cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br
 
 
 
-
-参考链接
+参考链接</br>
 https://www.js-tutorials.com/nodejs-tutorial/nodejs-session-example-using-express-session/
 https://github.com/expressjs/session/issues/281
 http://expressjs.com/zh-cn/guide/behind-proxies.html
