@@ -1,8 +1,5 @@
 # NodeJS Session Example Using Express Session
-
-这个教程帮助我们去理解如何在NodeJs程序中管理Session。</br>
-我们将创建一个express应用程序，同时使用 __express-session__ 的npm包。__express-session__ 是一个nodeJs包，用来在NodeJs中管理session。</br>
-目前我使用express 4。之前的Express 3已弃用了许多依赖项，例如“ bodyParser”，“ logger”等。</br>
+　　这个教程帮助我们去理解如何在NodeJs程序中管理Session。我们将创建一个express应用程序，同时使用 __express-session__ 的npm包。__express-session__ 是一个nodeJs包，用来在NodeJs中管理session。目前我使用express 4。之前的Express 3已弃用了许多依赖项，例如“ bodyParser”，“ logger”等。</br>
 阅读文章之前，最好已经熟知cookie基础知识，可以参考https://wangdoc.com/javascript/bom/cookie.html
 
 # 目录
@@ -15,7 +12,7 @@
 * 3.Express Session 的例子
 * 4.[在express-session中如何设置和获取session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#4在express-session中如何设置和获取session数据)
 * 5.[在express-session中如何删除session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#5在express-session中如何删除session数据)
-* 6.[express-session 常用参数](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#6express-session 常用参数)
+* 6.[express-session常用参数](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#6express-session常用参数)
 
 ## 1.Express3 和 Express4的不同点
 * 1) Express核心和中间件的变化。删除了对Connect和内置中间件的依赖，因此您必须自己添加中间件。
@@ -124,7 +121,7 @@ app.get('destorysession', function(req,res){
 })
 ```
 
-## 6.express-session 常用参数
+## 6.express-session常用参数
 * ### store
 会话存储实例，默认为新的MemoryStore实例。
 
@@ -136,21 +133,21 @@ app.get('destorysession', function(req,res){
 4. 根据之前所设置的```saveUninitialized```，在请求结束的时候，这个session对象将会储存在session store中（比如数据库，MemoryStore 缓存中）
 
 　　如果在request的周期里面，session object并没有发生改变，那么在请求结束时,如果```saveUninitialized```设置为 __false__, session object（当前仍然是空的，应为没有修改）将不会保存在session store中。</br>
-这样做的会阻止储存很多空的session object在session store中。由于没有什么可存储的，因此在请求结束时会“忘记”该会话。</br>
-那么在什么时候需要开启这个选项，```saveUninitialized```设置为 __true__ 呢？比如，当你想要确认返回进入的访客的时候。你可以根据他储存的session cookie（包含了一个唯一的id）来认出这个访客。
+　　这样做的会阻止储存很多空的session object在session store中。由于没有什么可存储的，因此在请求结束时会“忘记”该会话。</br>
+　　那么在什么时候需要开启这个选项，```saveUninitialized```设置为 __true__ 呢？比如，当你想要确认返回进入的访客的时候。你可以根据他储存的session cookie（包含了一个唯一的id）来认出这个访客。
 
 * ### resave
- 可能必须为不支持“ touch”命令session store会话存储启用此功能。这样做是告诉session store，特定session仍处于active。开启 __true__选项是必选的，因为某些存储将在一段时间后删除空闲（未使用）的session。</br>
-如果session stroe 驱动没有使用```touch```方法，那么必须开启```resave```,这样当session在请求中没有发生变化，也会在store中更新，使他处于活跃状态不被删除</br>
+　　可能必须为不支持“ touch”命令session store会话存储启用此功能。这样做是告诉session store，特定session仍处于active。开启 __true__选项是必选的，因为某些存储将在一段时间后删除空闲（未使用）的session。</br>
+　　如果session stroe 驱动没有使用```touch```方法，那么必须开启```resave```,这样当session在请求中没有发生变化，也会在store中更新，使他处于活跃状态不被删除</br>
 因此，是否需要启用此选项完全取决于您使用的session store。
 
 * ### Session.touch()
 更新```.maxAge```属性，一般情况下不需要调用，因为sessionmiddleware会帮你做这件事
 
 * ### cookie.secure 
-指定Secure Set-Cookie属性的布尔值。如果为 __true__，则设置安全属性，否则不设置。默认情况下，未设置安全属性。</br>
-将其设置为true时请注意，因为如果浏览器没有HTTPS连接，则兼容的客户端将来不会将cookie发送回服务器。</br>
-请注意，安全：true是推荐的选项。但是，它需要一个启用了https的网站，即，HTTPS对于安全cookie是必需的。如果设置了安全性，并且您通过HTTP访问站点，则不会设置cookie。如果您的node.js位于代理之后，并且使用secure：true，则需要在express中设置“ trust proxy”：
+　　指定Secure Set-Cookie属性的布尔值。如果为 __true__，则设置安全属性，否则不设置。默认情况下，未设置安全属性。</br>
+　　将其设置为true时请注意，因为如果浏览器没有HTTPS连接，则兼容的客户端将来不会将cookie发送回服务器。</br>
+　　请注意，安全：true是推荐的选项。但是，它需要一个启用了https的网站，即，HTTPS对于安全cookie是必需的。如果设置了安全性，并且您通过HTTP访问站点，则不会设置cookie。如果您的node.js位于代理之后，并且使用secure：true，则需要在express中设置“ trust proxy”：
 ```javascript
 var session = require('express-session')
 var app = express();
@@ -166,37 +163,6 @@ if( app.get('env) === 'production' ){
 
 app.use(session(sess))
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 参考链接</br>
 https://www.js-tutorials.com/nodejs-tutorial/nodejs-session-example-using-express-session/
