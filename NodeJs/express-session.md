@@ -134,6 +134,7 @@ app.get('destorysession', function(req,res){
 
 　　如果在request的周期里面，session object并没有发生改变，那么在请求结束时,如果```saveUninitialized```设置为 __false__, session object（当前仍然是空的，应为没有修改）将不会保存在session store中。</br>
 　　这样做的会阻止储存很多空的session object在session store中。由于没有什么可存储的，因此在请求结束时会“忘记”该会话。</br>
+</br>
 　　那么在什么时候需要开启这个选项，```saveUninitialized```设置为 __true__ 呢？比如，当你想要确认返回进入的访客的时候。你可以根据他储存的session cookie（包含了一个唯一的id）来认出这个访客。
 
 * ### resave
@@ -146,6 +147,7 @@ app.get('destorysession', function(req,res){
 
 * ### cookie.secure 
 　　指定Secure Set-Cookie属性的布尔值。如果为 __true__，则设置安全属性，否则不设置。默认情况下，未设置安全属性。</br>
+</br>
 　　将其设置为true时请注意，因为如果浏览器没有HTTPS连接，则兼容的客户端将来不会将cookie发送回服务器。</br>
 　　请注意，安全：true是推荐的选项。但是，它需要一个启用了https的网站，即，HTTPS对于安全cookie是必需的。如果设置了安全性，并且您通过HTTP访问站点，则不会设置cookie。如果您的node.js位于代理之后，并且使用secure：true，则需要在express中设置“ trust proxy”：
 ```javascript
