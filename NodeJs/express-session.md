@@ -15,7 +15,7 @@
 * 3.Express Session 的例子
 * 4.[在express-session中如何设置和获取session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#4在express-session中如何设置和获取session数据)
 * 5.[在express-session中如何删除session数据](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#5在express-session中如何删除session数据)
-* 6.[express-session 常用参数](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#6express-session 常用参数的含义)
+* 6.[express-session 常用参数](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md#6express-session 常用参数)
 
 ## 1.Express3 和 Express4的不同点
 * 1) Express核心和中间件的变化。删除了对Connect和内置中间件的依赖，因此您必须自己添加中间件。
@@ -135,7 +135,7 @@ app.get('destorysession', function(req,res){
 3. 创建一个空的session object（```req.session```）
 4. 根据之前所设置的```saveUninitialized```，在请求结束的时候，这个session对象将会储存在session store中（比如数据库，MemoryStore 缓存中）
 
-如果在request的周期里面，session object并没有发生改变，那么在请求结束时,如果```saveUninitialized```设置为 __false__, session object（当前仍然是空的，应为没有修改）将不会保存在session store中。</br>
+　　如果在request的周期里面，session object并没有发生改变，那么在请求结束时,如果```saveUninitialized```设置为 __false__, session object（当前仍然是空的，应为没有修改）将不会保存在session store中。</br>
 这样做的会阻止储存很多空的session object在session store中。由于没有什么可存储的，因此在请求结束时会“忘记”该会话。</br>
 那么在什么时候需要开启这个选项，```saveUninitialized```设置为 __true__ 呢？比如，当你想要确认返回进入的访客的时候。你可以根据他储存的session cookie（包含了一个唯一的id）来认出这个访客。
 
