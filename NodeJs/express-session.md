@@ -1,7 +1,5 @@
 # NodeJS Session Example Using Express Session
-这个教程帮助我们去理解如何在NodeJs程序中管理Session。我们将创建一个express应用程序，同时使用 __express-session__ 的npm包。__express-session__ 是一个nodeJs包，用来在NodeJs中管理session。
-</br>
-目前我使用express 4。之前的Express 3已弃用了许多依赖项，例如“ bodyParser”，“ logger”等。
+这个教程帮助我们去理解如何在NodeJs程序中管理Session。我们将创建一个express应用程序，同时使用 __express-session__ 的npm包。__express-session__ 是一个nodeJs包，用来在NodeJs中管理session。目前我使用express 4。之前的Express 3已弃用了许多依赖项，例如“ bodyParser”，“ logger”等。</br>
 </br>
 阅读文章之前，最好已经熟知cookie基础知识，可以参考https://wangdoc.com/javascript/bom/cookie.html
 
@@ -86,6 +84,7 @@ app.use(session({
 
 ### NodeJs session 储存在cookie中
 __cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br>
+</br>
 用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。该模块将session数据存储在cookie内的客户端上，而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。
 * cookie-session 在服务器不需要任何数据库，但是session数据大小不能超过浏览器的最大cookie大小限制
 * cookie-session 可以简化某些负载平衡方案。
@@ -136,13 +135,16 @@ app.get('destorysession', function(req,res){
 4. 根据之前所设置的```saveUninitialized```，在请求结束的时候，这个session对象将会储存在session store中（比如数据库，MemoryStore 缓存中）
 
 如果在request的周期里面，session object并没有发生改变，那么在请求结束时,如果```saveUninitialized```设置为 __false__, session object（当前仍然是空的，应为没有修改）将不会保存在session store中。</br>
+</br>
 这样做的会阻止储存很多空的session object在session store中。由于没有什么可存储的，因此在请求结束时会“忘记”该会话。</br>
 </br>
 那么在什么时候需要开启这个选项，```saveUninitialized```设置为 __true__ 呢？比如，当你想要确认返回进入的访客的时候。你可以根据他储存的session cookie（包含了一个唯一的id）来认出这个访客。
 
 * ### resave
 可能必须为不支持“ touch”命令session store会话存储启用此功能。这样做是告诉session store，特定session仍处于active。开启 __true__选项是必选的，因为某些存储将在一段时间后删除空闲（未使用）的session。</br>
+</br>
 如果session stroe 驱动没有使用```touch```方法，那么必须开启```resave```,这样当session在请求中没有发生变化，也会在store中更新，使他处于活跃状态不被删除</br>
+</br>
 因此，是否需要启用此选项完全取决于您使用的session store。
 
 * ### Session.touch()
