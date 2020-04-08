@@ -13,3 +13,6 @@
 
 ### NodeJs
 * #### [express-session](https://github.com/pangbooo/note/blob/master/NodeJs/express-session.md)
+
+https://stackoverflow.com/questions/23413401/what-does-trust-proxy-actually-do-in-express-js-and-do-i-need-to-use-it
+https://juejin.im/post/5b45f4f7f265da0fab400502
