@@ -108,7 +108,13 @@ app.get('/set_session', function(req, res){
 ```
 
 ## 5.在express-session中如何删除session数据
-我们将使用express session __destroy（）__ 方法从变量中删除session，找不到会话数据：您将获得错误，否则将发送“成功销毁”消息。
+我们将使用express session ```__destroy（）__``` 方法从变量中删除session，即```req.session = undefined; res.sessionID = undefined```。
+找不到```session```数据：您将获得```err```，否则将发送“成功销毁”消息。
+同时需要设置```res.clearCookie(cookieName, obj)``` 清除浏览器端 cookie。
+</br>
+
+express-session产生的sessionID 会储存在浏览器cookie，默认名 connect.sid 中。
+
 ```javascript
 app.get('destorysession', function(req,res){
   sessionData = req.session;
@@ -120,7 +126,17 @@ app.get('destorysession', function(req,res){
       res.json('Session destroy successfully')
     }
   })
-})
+});
+
+router.get("/logout", (req, res) => {
+    req.session.destroy(function(){ 
+        //The name of the session ID cookie to set in the response (and read from in the request).
+        //The default value is 'connect.sid'.
+        res.clearCookie('connect.sid', {path: '/'})
+        res.redirect(');
+    });
+});
+
 ```
 
 ## 6.express-session常用参数
