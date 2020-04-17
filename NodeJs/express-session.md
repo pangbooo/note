@@ -41,18 +41,18 @@ express.static | serve-static
 Session用来在应用程序的服务端储存数据。Web应用程序基于HTTP协议运行。Http是无状态的，所以应用程序不知道之前的Requset或者活动。session可以帮助解决这个问题。
 
 ### 在NodeJs中储存session的方式
+用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。</br>
+__cookie-session__ npm包，是一个基于cookie的简单会话中间件。该模块将session数据存储在cookie内的客户端上。</br>
+而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。</br>
+
 *  __Cookie__
-可以在cookie中储存session(sessionId/全部session数据)， 但是是储存在客户端
+可以在cookie中储存session， 但是是储存在客户端
 *  __Memoey Cache__
 可以在缓存中储存session。众所周知，缓存存储在内存中。您可以使用Redis和Memcached等任何缓存模块。
 *  __Database__
 数据库也是存储会话数据服务器端的选项。
 
 ### NodeJs session 储存在cookie中
-用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。</br>
-__cookie-session__ npm包，是一个基于cookie的简单会话中间件。该模块将session数据存储在cookie内的客户端上。</br>
-而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。</br>
-</br>
 * cookie-session 在服务器不需要任何数据库，但是session数据大小不能超过浏览器的最大cookie大小限制
 * cookie-session 可以简化某些负载平衡方案。
 * cookie-session 可用于存储“轻量”session,查找数据库支持的辅助存储以减少数据库查找。
