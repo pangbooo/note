@@ -1,4 +1,4 @@
-# NodeJS Session Example Using Express Session
+# Express中管理Session（express-session） 
 这个教程帮助我们去理解如何在NodeJs程序中管理Session。我们将创建一个express应用程序，同时使用 __express-session__ 的npm包。__express-session__ 是一个nodeJs包，用来在NodeJs中管理session。目前我使用express 4。之前的Express 3已弃用了许多依赖项，例如“ bodyParser”，“ logger”等。</br>
 </br>
 阅读文章之前，最好已经熟知cookie基础知识，可以参考https://wangdoc.com/javascript/bom/cookie.html
@@ -42,28 +42,20 @@ Session用来在应用程序的服务端储存数据。Web应用程序基于HTTP
 
 ### 在NodeJs中储存session的方式
 *  __Cookie__
-可以在cookie中储存session， 但是是储存在客户端
+可以在cookie中储存session(sessionId/全部session数据)， 但是是储存在客户端
 *  __Memoey Cache__
 可以在缓存中储存session。众所周知，缓存存储在内存中。您可以使用Redis和Memcached等任何缓存模块。
 *  __Database__
 数据库也是存储会话数据服务器端的选项。
 
-### NodeJs session 连接 MySQL
-Node.js具有mysql模块，用于将Node.js应用程序与mysql连接。我们将安装“ mysql”软件包，并将以下代码添加到server.js文件中以创建数据库连接。
-```javascript
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'dummy_db'
-});
+### NodeJs session 储存在cookie中
+用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。该模块将session数据存储在cookie内的客户端上，而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。</br>
+__cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br>
+</br>
+* cookie-session 在服务器不需要任何数据库，但是session数据大小不能超过浏览器的最大cookie大小限制
+* cookie-session 可以简化某些负载平衡方案。
+* cookie-session 可用于存储“轻量”session,查找数据库支持的辅助存储以减少数据库查找。
 
-connection.connect(function(err) {
-  if (err) throw err
-  console.log('You are now connected...')
-})
-```
 
 ### NodeJs session 连接Memcached
 nodejs具有connect-memcached模块，用于将Memcached与nodejs应用程序连接。我们可以使用connect-memcached将会话存储到内存中。
@@ -82,13 +74,23 @@ app.use(session({
 }));
 ```
 
-### NodeJs session 储存在cookie中
-__cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br>
-</br>
-用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。该模块将session数据存储在cookie内的客户端上，而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。
-* cookie-session 在服务器不需要任何数据库，但是session数据大小不能超过浏览器的最大cookie大小限制
-* cookie-session 可以简化某些负载平衡方案。
-* cookie-session 可用于存储“轻量”session,查找数据库支持的辅助存储以减少数据库查找。
+### NodeJs session 连接 MySQL
+Node.js具有mysql模块，用于将Node.js应用程序与mysql连接。我们将安装“ mysql”软件包，并将以下代码添加到server.js文件中以创建数据库连接。
+```javascript
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'dummy_db'
+});
+
+connection.connect(function(err) {
+  if (err) throw err
+  console.log('You are now connected...')
+})
+```
+
 
 ## 3.Express Session 的例子
 ## 4.在express-session中如何设置和获取session数据
@@ -108,9 +110,11 @@ app.get('/set_session', function(req, res){
 ```
 
 ## 5.在express-session中如何删除session数据
-我们将使用express session ```__destroy（）__``` 方法从变量中删除session，即```req.session = undefined; res.sessionID = undefined```。
-找不到```session```数据：您将获得```err```，否则将发送“成功销毁”消息。
-同时需要设置```res.clearCookie(cookieName, obj)``` 清除浏览器端 cookie。
+我们将使用express session ```destroy（）``` 方法从变量中删除session，即```req.session = undefined; res.sessionID = undefined```。
+如果找不到```session```数据：您将获得```err```，否则将发送“成功销毁”消息。</br>
+</br>
+同时需要设置```res.clearCookie(cookieName, obj)``` 清除浏览器端 cookie。</br>
+__注意:__ 第二个参数```obj```，如```{path: '/'，HttpOnly: true}``` 需要与设置时候保持一致(除了 ```expires``` 和 ```maxAge```)，才可以清除成功这个cookie。
 </br>
 
 express-session产生的sessionID 会储存在浏览器cookie，默认名 connect.sid 中。
