@@ -49,8 +49,9 @@ Session用来在应用程序的服务端储存数据。Web应用程序基于HTTP
 数据库也是存储会话数据服务器端的选项。
 
 ### NodeJs session 储存在cookie中
-用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。该模块将session数据存储在cookie内的客户端上，而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。</br>
-__cookie-session__ npm包，是一个基于cookie的简单会话中间件。</br>
+用户session可以用cookie的两种主要方式存储：在服务器上或在客户端上。</br>
+__cookie-session__ npm包，是一个基于cookie的简单会话中间件。该模块将session数据存储在cookie内的客户端上。</br>
+而类似express-session的模块仅将sessionID存储在cookie内的客户端上，并将session数据存储在服务器上（通常在数据库中）。</br>
 </br>
 * cookie-session 在服务器不需要任何数据库，但是session数据大小不能超过浏览器的最大cookie大小限制
 * cookie-session 可以简化某些负载平衡方案。
