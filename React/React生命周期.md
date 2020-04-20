@@ -162,8 +162,8 @@ class WordAdder extends React.Component {
 
 ```
 
-#### static getDerivedStateFromProps()
-#### getSnapshotBeforeUpdate()
+* #### static getDerivedStateFromProps()
+* #### getSnapshotBeforeUpdate()
 
 
 
