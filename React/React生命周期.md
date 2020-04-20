@@ -61,14 +61,14 @@ __new props__
 
 ### 生命周期详细
 #### shouldComponentUpdate
-```shouldComponentUpdate(nextProps, nextState)```
+* ```shouldComponentUpdate(nextProps, nextState)```
 > 此方法仅作为 __性能优化__ 的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。你应该考虑使用内置的 __PureComponent__ 组件，而不是手动编写。
 
-* shouldComponentUpdate 的作用
+##### shouldComponentUpdate 的作用
 这是一个组件的子树。每个节点中，__SCU__ 代表 shouldComponentUpdate 返回的值，而 __vDOMEq__ 代表返回的 React 元素是否相同。最后，圆圈的颜色代表了该组件是否需要被调停。
-！[shouldComponentUpdate](https://github.com/pangbooo/note/blob/master/imgs/should-component-update.png)
+![shouldComponentUpdate](https://github.com/pangbooo/note/blob/master/imgs/should-component-update.png)
 
-* 示例(一)
+##### 示例(一)
 ```javascript
 class CounterButton extends React.Component {
   constructor(props) {
@@ -118,7 +118,7 @@ class CounterButton extends React.PureComponent {
 }
 ```
 
-* 示例(二)
+##### 示例(二)
 ```javascript
 class ListOfWords extends React.PureComponent {
   render() {
