@@ -60,8 +60,8 @@ __new props__
 
 
 ### 生命周期详细
-#### shouldComponentUpdate
-* ```shouldComponentUpdate(nextProps, nextState)```
+* #### shouldComponentUpdate
+```shouldComponentUpdate(nextProps, nextState)```
 > 此方法仅作为 __性能优化__ 的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。你应该考虑使用内置的 __PureComponent__ 组件，而不是手动编写。
 
 ##### shouldComponentUpdate 的作用
