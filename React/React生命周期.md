@@ -3,6 +3,7 @@
 1. 挂载和卸载
 2. 更新
 3. 整体流程
+4. 生命周期详细
 
 ### 升级与变化
 __注：以下生命周期在React 16.3后已不推荐使用。__
@@ -56,3 +57,113 @@ __new props__
 ### 整理流程（16.3之后）
 ![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)
 ![不常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-2.PNG)
+
+
+### 生命周期详细
+#### shouldComponentUpdate
+```shouldComponentUpdate(nextProps, nextState)```
+> 此方法仅作为 __性能优化__ 的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。你应该考虑使用内置的 __PureComponent__ 组件，而不是手动编写。
+
+* shouldComponentUpdate 的作用
+这是一个组件的子树。每个节点中，__SCU__ 代表 shouldComponentUpdate 返回的值，而 __vDOMEq__ 代表返回的 React 元素是否相同。最后，圆圈的颜色代表了该组件是否需要被调停。
+！[shouldComponentUpdate](https://github.com/pangbooo/note/blob/master/imgs/should-component-update.png)
+
+* 示例(一)
+```javascript
+class CounterButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.color !== nextProps.color) {
+      return true;
+    }
+    if (this.state.count !== nextState.count) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    return (
+      <button
+        color={this.props.color}
+        onClick={() => this.setState(state => ({count: state.count + 1}))}>
+        Count: {this.state.count}
+      </button>
+    );
+  }
+}
+```
+> 如果```props``` 和 ```state``` 只进行 __浅比较__，则可以使用 __PureComponent__ 进行简化
+
+```javascript
+class CounterButton extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  render() {
+    return (
+      <button
+        color={this.props.color}
+        onClick={() => this.setState(state => ({count: state.count + 1}))}>
+        Count: {this.state.count}
+      </button>
+    );
+  }
+}
+```
+
+* 示例(二)
+```javascript
+class ListOfWords extends React.PureComponent {
+  render() {
+    return <div>{this.props.words.join(',')}</div>;
+  }
+}
+
+class WordAdder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      words: ['marklar']
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // 这部分代码很糟，而且还有 bug
+    //push修改了同一个数组，导致组件ListOfWords中的 nextProps 和 this.props 没有发生变化
+    const words = this.state.words;
+    words.push('marklar'); 
+    this.setState({words: words});
+
+    //TODO
+    /**
+    this.setState(state => ({
+        words: [...this.state.words, 'marklar']
+    }))
+    **/
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick} />
+        <ListOfWords words={this.state.words} />
+      </div>
+    );
+  }
+}
+
+```
+
+#### static getDerivedStateFromProps()
+#### getSnapshotBeforeUpdate()
+
+
+
