@@ -1,10 +1,15 @@
 # React升级
 *  16.2 -> 16.3
-    * 生命周期（~~componentWillMount,componetWillReceiveProps,componentWillUpdate~~）
+    * 生命周期
     * Refs & DOM
     * 转发Ref
+* 16.3 -> 16.6
+    * Code Splitting
+    * React.memo
 
-### [生命周期](https://github.com/pangbooo/note/blob/master/React/React生命周期.md)
+### 生命周期
+https://github.com/pangbooo/note/blob/master/React/React生命周期.md
+
 ### Refs
 > React 16.3以及之后推荐使用React.createRef()；16.3之前推荐使用回调形式的 refs。
 
