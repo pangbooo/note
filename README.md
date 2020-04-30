@@ -3,6 +3,7 @@
 ### React
 * #### [React基础知识](https://github.com/pangbooo/note/blob/master/React/React基础知识.md)
 * #### [React生命周期](https://github.com/pangbooo/note/blob/master/React/React生命周期.md)
+* #### [React升级](https://github.com/pangbooo/note/blob/master/React/React升级.md)
 
 ### 浏览器
 * #### HTTP

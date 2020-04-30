@@ -17,4 +17,7 @@ https://github.com/pangbooo/note/blob/master/React/React生命周期.md
 * 当 ```ref``` 属性用于自定义 class 组件时，ref 对象接收组件的挂载实例作为其 ```current``` 属性。
 *  __你不能在函数组件上使用 ref 属性__，因为他们没有实例。
 
+### React.mome
+> React.memo 为高阶组件。它与 React.PureComponent 非常相似，但只适用于函数组件，而不适用 class 组件。
+
     
