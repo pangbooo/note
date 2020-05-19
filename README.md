@@ -1,5 +1,8 @@
 # pangbooo的前端学习笔记
 
+### Javascript
+* #### [深拷贝 vs 浅拷贝](https://juejin.im/post/59ac1c4ef265da248e75892b)
+
 ### React
 * #### [React基础知识](https://github.com/pangbooo/note/blob/master/React/React基础知识.md)
 * #### [React生命周期](https://github.com/pangbooo/note/blob/master/React/React生命周期.md)
