@@ -162,6 +162,14 @@ class WordAdder extends React.Component {
 ```
 
 * #### static getDerivedStateFromProps()
+> 它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。</br>
+一个常见误解是，getDerivedStateFormProps和ComponentWillReceiveProps 只有在接受新props才更新，
+而__事实是__，只要父级组件更新，那么就会触发这个生命周期。
+
+* 派生模式（Derived State）
+* 反面模式（anti-pattern）
+
 * #### getSnapshotBeforeUpdate()
 
 
