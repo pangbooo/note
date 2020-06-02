@@ -170,6 +170,132 @@ getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化
 * 派生模式（Derived State）
 * 反面模式（anti-pattern）
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* 建议的模式
+1. 完全可控组件
+```javascript
+function EmailInput(props) {
+  return <input onChange={props.onChange} value={props.email} />;
+}
+```
+
+2. 有key的非可控组件
+> 另外一个选择是让组件自己存储临时的 email state。在这种情况下，组件仍然可以从 prop 接收“初始值”，但是更改之后的值就和 prop 没关系了
+```javascript
+class EmailInput extends Component {
+  state = { email: this.props.defaultEmail };
+
+  handleChange = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  render() {
+    return <input onChange={this.handleChange} value={this.state.email} />;
+  }
+}
+```
+```javascript
+<EmailInput
+  defaultEmail={this.props.user.email}
+  key={this.props.user.id}
+/>
+```
+__当 key 变化时， React 会创建一个新的而不是更新一个既有的组件。__ </br>
+每次 ID 更改，都会重新创建 EmailInput ，并将其状态重置为最新的 defaultEmail 值。
+
+3. 其他
+##### 选项一：用 prop 的 ID 重置非受控组件
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.defaultEmail,
+    prevPropsUserID: this.props.userID
+  }
+
+  static getDerivedStateFromProps (props, state){
+    if(props.userID !== state.prevPropsUserID) {
+      return {
+        email: props.defaultEmail,
+        prevPropsUserID: props.userID
+      }
+    }
+
+    return null;
+  }
+
+}
+```
+
+##### 选项二：使用实例方法重置非受控组件
+> 父组件使用ref调用 resetEmailForNewUser，重置
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.defaultEmail
+  };
+
+  resetEmailForNewUser(newEmail) {
+    this.setState({ email: newEmail });
+  }
+
+  // ...
+}
+```
+refs 在某些情况下很有用，比如这个。但通常我们建议谨慎使用。即使是做一个演示，这个命令式的方法也是非理想的，因为这会导致两次而不是一次渲染。
 * #### getSnapshotBeforeUpdate()
 
 
