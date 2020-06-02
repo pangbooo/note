@@ -167,63 +167,51 @@ getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化
 一个常见误解是，getDerivedStateFormProps和ComponentWillReceiveProps 只有在接受新props才更新，
 而__事实是__，只要父级组件更新，那么就会触发这个生命周期。
 
+
 * 派生模式（Derived State）
 * 反面模式（anti-pattern）
+1. 直接复制props到state
+```javascript
+class EmailInput extends Component {
+  state = { email: this.props.email };
 
+  render() {
+    return <input onChange={this.handleChange} value={this.state.email} />;
+  }
 
+  handleChange = event => {
+    this.setState({ email: event.target.value });
+  };
 
+  componentWillReceiveProps(nextProps) {
+    // 这会覆盖所有组件内的 state 更新！
+    // 不要这样做。
+    this.setState({ email: nextProps.email });
+  }
+}
+```
+每次父组件更新，都会触发state更新，导致输入input的value丢失。
+尽管我们去比较nextProps.email !== this.state.email , 都不会避免这个问题。
 
+2. 在 props 变化后修改 state
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.email
+  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  componentWillReceiveProps(nextProps) {
+    // 只要 props.email 改变，就改变 state
+    if (nextProps.email !== this.props.email) {
+      this.setState({
+        email: nextProps.email
+      });
+    }
+  }
+  
+  // ...
+}
+```
 
 * 建议的模式
 1. 完全可控组件
