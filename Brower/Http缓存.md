@@ -3,6 +3,7 @@
 * (共享)代理缓存
 
 ## Cache-Control
+HTTP/1.1定义的 Cache-Control 头用来区分对缓存机制的支持情况， 请求头和响应头都支持这个属性。通过它提供的不同的值来定义缓存策略。
 ```
 Cache-Control: no-store; //没有缓存
 Cache-Control: no-cache; //缓存但重新验证
