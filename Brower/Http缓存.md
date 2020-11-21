@@ -30,7 +30,7 @@ Pragma: no-cache;
     1. server 返回：
     Cache-Control: max-age=31536000; </br>
     或 Expires: Wed, 21 Oct 2015 07:28:00 GMT </br>
-    或 Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+    或 Last-Modified: day-name, day month year hour: minute: second GMT
 
 1. 第二次发送请求
     1. cache 检查max-age是否过期
