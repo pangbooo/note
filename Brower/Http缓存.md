@@ -1,4 +1,6 @@
 # Http缓存
+通过复用以前获取的资源，可以显著提高网站和应用程序的性能。Web 缓存减少了等待时间和网络流量，因此减少了显示资源表示形式所需的时间。通过使用 HTTP缓存，变得更加响应性。
+
 * (私有)浏览器缓存
 * (共享)代理缓存
 
@@ -18,3 +20,45 @@ Pragma 是 __HTTP/1.0__ 标准中定义的一个header属性，__请求__ 中包
 ```
 Pragma: no-cache;
 ```
+
+## 新鲜度
+### 缓存驱逐
+驱逐算法用于将陈旧的资源（缓存副本）替换为新鲜的。
+
+* 流程
+1. 第一次发送请求
+    1. server 返回：
+    Cache-Control: max-age=31536000; </br>
+    或 Expires: Wed, 21 Oct 2015 07:28:00 GMT </br>
+    或 Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+
+1. 第二次发送请求
+    1. cache 检查max-age是否过期
+    2. 结果:
+       没过期 -> 使用缓存资源 </br>
+       已过期 -> 
+        1. cache 添加一个If-None-Match 请求头，发送请求server
+        2. 结果:
+            没过期304 (Not Modified)（该响应不会有带有实体信息）</br>
+            过期返回200 新的资源
+
+### 改进资源
+不频繁更新的文件会使用特定的命名方式：在URL后面（通常是文件名后面）会加上版本号。
+
+## 缓存验证
+### 弱验证
+说它弱是因为它只能精确到一秒
+* res（响应头） -> Last-Modified
+  req（请求头） -> If-Modified-Since
+
+### 强验证
+* res（响应头） -> ETag
+  req（请求头） -> If-None-Match
+```
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+ETag: W/"0815"
+```
+
+
+
+
