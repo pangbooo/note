@@ -27,18 +27,18 @@ Pragma: no-cache;
 
 * 流程
 1. 第一次发送请求
-    1. server 返回：
+    1. server 返回：</br>
     Cache-Control: max-age=31536000; </br>
     或 Expires: Wed, 21 Oct 2015 07:28:00 GMT </br>
     或 Last-Modified: day-name, day month year hour: minute: second GMT
 
 1. 第二次发送请求
     1. cache 检查max-age是否过期
-    2. 结果:
+    2. 结果: </br>
        没过期 -> 使用缓存资源 </br>
        已过期 -> 
         1. cache 添加一个If-None-Match 请求头，发送请求server
-        2. 结果:
+        2. 结果: </br>
             没过期304 (Not Modified)（该响应不会有带有实体信息）</br>
             过期返回200 新的资源
 
