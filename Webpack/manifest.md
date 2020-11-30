@@ -1,4 +1,6 @@
-#Manifest
+# Manifest
+
+## 代码组成
 * 业务代码
 * 你的源码会依赖的任何第三方的 library 或 "vendor" 代码。
 * webpack 的 runtime 和 manifest，管理所有模块的交互。
