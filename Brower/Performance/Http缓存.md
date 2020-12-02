@@ -30,7 +30,8 @@ Pragma: no-cache;
     1. server 返回：</br>
     Cache-Control: max-age=31536000; </br>
     或 Expires: Wed, 21 Oct 2015 07:28:00 GMT </br>
-    或 Last-Modified: day-name, day month year hour: minute: second GMT
+    或 Last-Modified: day-name, day month year hour: minute: second GMT </br>
+    或 ETag
 
 1. 第二次发送请求
     1. cache 检查max-age是否过期
@@ -48,12 +49,12 @@ Pragma: no-cache;
 ## 缓存验证
 ### 弱验证
 说它弱是因为它只能精确到一秒
-* res（响应头） -> Last-Modified </br>
-  req（请求头） -> If-Modified-Since
+* 第一次请求res（响应头） -> Last-Modified </br>
+  之后的请求req（请求头） -> If-Modified-Since
 
 ### 强验证
-* res（响应头） -> ETag </br>
-  req（请求头） -> If-None-Match
+* 第一次请求res（响应头） -> ETag </br>
+  之后的请求req（请求头） -> If-None-Match
 ```
 ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 ETag: W/"0815"
