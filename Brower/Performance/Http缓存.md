@@ -35,8 +35,8 @@ Pragma: no-cache;
 1. 第二次发送请求
     1. cache 检查max-age是否过期
     2. 结果: </br>
-       没过期 -> 使用缓存资源 </br>
-       已过期 -> 
+       没过期 -> 使用缓存资源(__强缓存__) </br> 
+       已过期 -> （__协商缓存__）
         1. cache 添加一个If-None-Match 请求头，发送请求server
         2. 结果: </br>
             没过期304 (Not Modified)（该响应不会有带有实体信息）</br>
@@ -48,11 +48,11 @@ Pragma: no-cache;
 ## 缓存验证
 ### 弱验证
 说它弱是因为它只能精确到一秒
-* res（响应头） -> Last-Modified
+* res（响应头） -> Last-Modified </br>
   req（请求头） -> If-Modified-Since
 
 ### 强验证
-* res（响应头） -> ETag
+* res（响应头） -> ETag </br>
   req（请求头） -> If-None-Match
 ```
 ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
