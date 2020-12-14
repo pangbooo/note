@@ -135,12 +135,12 @@ app.get('destorysession', function(req,res){
 
 router.get("/logout", (req, res) => {
    console.log(req.session) 
-        // cookie: {
-        //   path: '/',
-        //   _expires: 2021-01-13T07:16:11.995Z,
-        //   originalMaxAge: 1231232321323,
-        //   httpOnly: true
-        // },
+    // cookie: {
+    //   path: '/',
+    //   _expires: 2021-01-13T07:16:11.995Z,
+    //   originalMaxAge: 1231232321323,
+    //   httpOnly: true
+    // },
     console.log('sessionID', req.sessionID) //dadEQWED_321fasfAASFA-4jh4nj412
     req.session.destroy(function(){ 
         console.log(req.session) //undefined
@@ -148,7 +148,9 @@ router.get("/logout", (req, res) => {
         //The name of the session ID cookie to set in the response (and read from in the request).
         //destroy之后，会在下次request中创建新的req.sessionID
         
-        res.clearCookie('connect.sid', {path: '/'}) //清除浏览器 path '/', name是connect.sid的cookie
+        //清除浏览器 path '/', name是connect.sid的cookie
+        //cookie中更新connect.sid的值
+        res.clearCookie('connect.sid', {path: '/'}) 
         res.redirect(');
     });
 });
