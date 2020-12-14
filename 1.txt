@@ -1,3 +1,33 @@
-facebook login
+[facebook]
 https://developers.facebook.com/docs/facebook-login/auth-vs-data
-https://cloud.tencent.com/developer/article/1620409
+Authentication Expiration
+When your app uses Facebook Login to authenticate someone, it receives a User access token. If your app uses one of the Facebook SDKs, this token lasts for about 60 days. However, the SDKs automatically refresh the token whenever the person uses your app, so the tokens expire 60 days after last use. If your app doesn't use the Facebook SDKs, you need to include code that refreshes the User token manually. If the User access token expires, your app must put the user through the login flow again.
+
+
+[apple]
+https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api/authenticating_users_with_sign_in_with_apple
+Initialize an authentication session with your app server and associate a client session with an ID token using the nonce value. You can request to receive the user’s information, such as name and email address. If the user has approved accessing this information, your authorization request includes the requested information.
+
+[twitter]
+A successful response contains the oauth_token, oauth_token_secret parameters. The token and token secret should be stored and used for future authenticated requests to the Twitter API. To determine the identity of the user, use GET account/verify_credentials.
+
+
+1. https://api.twitter.com/oauth/request_token
+Response: oauth_token=Z6eEdO8MOmk394WozF5oKyuAv855l4Mlqo7hhlSLik&
+oauth_token_secret=Kd75W4OQfb2oJTV0vzGzeXftVAwgMnEK9MumzYcM&
+oauth_callback_confirmed=true
+
+2.https://api.twitter.com/oauth/authenticate?
+oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0
+
+
+user_click -> grant access -> site collects OAuth token
+
+/sign-in-with-twitter/?
+        oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0&
+        oauth_verifier=uw7NjWHT6OJ1MpJOXsHfNxoAhPKpgI8BlYDhxEjIBY HTTP/1.1
+
+
+3. https://api.twitter.com/oauth/access_token
+Request:oauth_verifier 
+Response: oauth_token, oauth_token_secret

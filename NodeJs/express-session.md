@@ -118,7 +118,7 @@ app.get('/set_session', function(req, res){
 __注意:__ 第二个参数```obj```，如```{path: '/'，HttpOnly: true}``` 需要与设置时候保持一致(除了 ```expires``` 和 ```maxAge```)，才可以清除成功这个cookie。
 </br>
 
-express-session产生的sessionID 会储存在浏览器cookie，默认名 connect.sid 中。
+~~session产生的sessionID 会储存在浏览器cookie，默认名 connect.sid 中。~~
 
 ```javascript
 app.get('destorysession', function(req,res){
@@ -134,10 +134,21 @@ app.get('destorysession', function(req,res){
 });
 
 router.get("/logout", (req, res) => {
+   console.log(req.session) 
+        // cookie: {
+        //   path: '/',
+        //   _expires: 2021-01-13T07:16:11.995Z,
+        //   originalMaxAge: 1231232321323,
+        //   httpOnly: true
+        // },
+    console.log('sessionID', req.sessionID) //dadEQWED_321fasfAASFA-4jh4nj412
     req.session.destroy(function(){ 
+        console.log(req.session) //undefined
+        console.log('sessionID', req.sessionID) //dadEQWED_321fasfAASFA-4jh4nj412
         //The name of the session ID cookie to set in the response (and read from in the request).
-        //The default value is 'connect.sid'.
-        res.clearCookie('connect.sid', {path: '/'})
+        //destroy之后，会在下次request中创建新的req.sessionID
+        
+        res.clearCookie('connect.sid', {path: '/'}) //清除浏览器 path '/', name是connect.sid的cookie
         res.redirect(');
     });
 });
