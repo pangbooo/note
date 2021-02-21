@@ -1,11 +1,17 @@
 # React生命周期
-1. 生命周期的升级与变化
-2. 挂载和卸载
-3. 更新
-4. 整体流程
-5. 生命周期详细
+1. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
+2. [挂载和卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
+3. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
+4. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
+5. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
 
 ### 升级与变化
+#### 新增生命周期
+* static getDerivedStateFromProps()<br/>
+  每次render()之前执行
+* getSnapshotBeforeUpdate()<br/>
+  每次componentDidUpdate()之前执行
+
 __注：以下生命周期在React 16.3后已不推荐使用。__
 * componentWillMount
 * componetWillReceiveProps
@@ -19,7 +25,7 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 ### 挂载
 > 当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下
 * constructor
-* static getDerivedStateFromProps(props,state) / ~~UNSFFE_componentWillMount~~ 
+* __static getDerivedStateFromProps(props,state)__
 * render
 * componentDidMount
 <br/>
@@ -33,14 +39,14 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 执行一些清理方法，如事件回收、清除定时器。
 
 ### 更新
-16.3之后
-* static getDerivedStateFromProps()
-* shouleComponentUpdate()
+#### 16.3之后
+* __static getDerivedStateFromProps()__
+* __shouleComponentUpdate()__
 * render()
-* getSnapshotBeforeUpdate()
+* __getSnapshotBeforeUpdate()__
 * componentDidUpdate()
 
-16.3之前<br/>
+#### 16.3之前
 __自身setState或者调用forUpdate()__
 * shouleComponentUpdate
 * componentWillUpdate
