@@ -1,11 +1,10 @@
 # 1.浏览器同源政策及其规避方法
-https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
-* #### 概念
-* #### Cookie
-* #### iframe
-* #### AJAX
+1. [概念]()
+2. [Cookie]()
+3. [iframe]()
+4. [AJAX]()
 
-### 概念
+## 1. 概念
 1）同源：协议, 域名, 端口 相同
 http://www.example.com/dir/page.html
 
@@ -18,25 +17,27 @@ http://www.example.com/dir/page.html
 - DOM 无法获取
 - AJAX 请求不能发送
 
-### Cookie
-Cookie 默认只有同源的网页才可以共享。<br/>
-服务器在浏览器端保存Cookie，Http头设置一个Set-Cookie字段
-
+## 2. Cookie
+Cookie 默认只有同源的网页才可以共享。
 ```javascript
 HTTP/1.0 200 OK
 Content-type: text/html
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;Domain=example.com; path=/blog Secure; HttpOnly
 ```
-设置Domain=example.com，则exapmle.com和子域名w1.exapmle.com都可以访问cookie
+* __一级域名__ 服务端设置Domain=example.com，则子域名（w1.exapmle.com）都可以访问cookie
+* __子域名__（w1.exapmle.com、w2.exapmle.com）同时设置相同的Domain=example.com,两个网页就可以共享Cookie。
 
-### iframe
-对于完全不同源的网站，目前有三种方法，可以解决跨域窗口的通信问题。
-- 片段识别符
-- window.name
-- 跨文档通信API(Cross-document messagin) 
-....
+## 3. iframe
+* 如果两个窗口一级域名相同，只是二级域名不同，那么设置上一节介绍的document.domain属性，就可以规避同源政策，拿到DOM。
+* 对于完全不同源的网站，目前有三种方法，可以解决跨域窗口的通信问题。
 
-### AJAX
+#### 片段识别符
+> 片段标识符（fragment identifier）指的是，URL的#号后面的部分，比如http://example.com/x.html#fragment的#fragment。如果只是改变片段标识符，页面不会重新刷新。 
+
+#### window.name
+#### 跨文档通信API(Cross-document messagin) 
+
+## 4. AJAX
 同源政策规定，AJAX请求只能发给同源的网址，否则就报错。
 除了架设服务器代理（浏览器请求同源服务器，再由后者请求外部服务），有三种方法规避这个限制。
 
@@ -44,9 +45,9 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;Domain=example.com; 
 - WebSocket
 - __CORS__
 
-#### 1) JSONP
-原理： 网页通过添加一个<script>元素，向服务器请求JSON数据，这种做法不受同源政策限制。                             
-      服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。
+### 4.1 JSONP
+> 原理： 网页通过添加一个```<script>```元素，向服务器请求JSON数据，这种做法不受同源政策限制。服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。
+
 ```javascript
 function addScriptTag(src){
   var script = document.createElement('script');
@@ -70,3 +71,22 @@ foo({
 ```
 优点：简单适用，老式浏览器全部支持
 缺点： 1.只能法GET请求。 2.后台需要配合修改 （服务端必须要调整以返回callback(...)）
+
+### 4.2 WebSocket
+> WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。
+```
+GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+Origin: http://example.com (*)
+```
+
+### 4.3 CORS
+CORS是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是W3C标准，是跨源AJAX请求的根本解决方法。相比JSONP只能发GET请求，CORS允许任何类型的请求。
+
+参考<br/>
+* https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
