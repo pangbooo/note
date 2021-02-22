@@ -1,8 +1,8 @@
 # 1.浏览器同源政策及其规避方法
-1. [概念]()
-2. [Cookie]()
-3. [iframe]()
-4. [AJAX]()
+1. [概念](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md#1-%E6%A6%82%E5%BF%B5)
+2. [Cookie](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md#2-cookie)
+3. [iframe](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md#3-iframe)
+4. [AJAX](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md#4-ajax)
 
 ## 1. 概念
 1）同源：协议, 域名, 端口 相同
