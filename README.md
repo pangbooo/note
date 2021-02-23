@@ -2,6 +2,7 @@
 
 ### Javascript
 * #### [深拷贝 vs 浅拷贝](https://juejin.im/post/59ac1c4ef265da248e75892b)
+* #### [浅克隆、深克隆](https://github.com/pangbooo/note/blob/master/Javascript/clone.md)
 
 ### React
 * #### [React基础知识](https://github.com/pangbooo/note/blob/master/React/React基础知识.md)
