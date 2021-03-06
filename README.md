@@ -9,6 +9,7 @@
 * #### [React生命周期](https://github.com/pangbooo/note/blob/master/React/React生命周期.md)
 * #### [React升级](https://github.com/pangbooo/note/blob/master/React/React升级.md)
 * #### [diff算法](https://github.com/pangbooo/note/blob/master/React/diff算法.md)
+* #### [性能优化](https://github.com/pangbooo/note/blob/master/React/React性能优化.md)
 
 ### 浏览器
 * #### HTTP
