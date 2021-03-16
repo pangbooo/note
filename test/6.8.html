@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+             function* NinjaGenerator(action){
+                const imposter = yield ("Hattori " + action);
+                yield("Yoshi" + ' (' + imposter + ') ' + action);
+             }
+
+             const a = NinjaGenerator('a');
+             const result = a.next();
+             console.log('result', result)
+
+             const result2 = a.next('b');
+             console.log('result2', result2)
+
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            //生成器
+            function* WeaponGenerator(){ 
+                yield 'K1'; 
+                //生产一个中间结果 -> {value：'k1', done:false}
+                //                                 done -> 指示器
+                yield 'K2';
+                
+            }    
+
+            //迭代器
+            const weaponsIterator = WeaponGenerator();
+
+            //next() => 向生成器请求新值
+            const result = weaponsIterator.next();
+            console.log('result', result);
+            // {value：'k1', done:false}
+            
+
+            const result2 = weaponsIterator.next();
+            console.log('result2', result2);
+
+            const result3 = weaponsIterator.next();
+            console.log('result3', result3);
+
+            let item;
+            while (!(item = weaponsIterator.next()).done){
+                console.log('item', item.value)
+            }
+
+            for(let w of WeaponGenerator()){
+                console.log('w...', w)
+            }
+            
+        </script>
+    </body>
+</html>

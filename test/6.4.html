@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function* WarriorGenerator(){ 
+                yield 'W1';
+                yield* NinjaGenerator(); //跳转到另一个生成器
+                yield 'W2';
+            }    
+            
+
+            function* NinjaGenerator(){
+                yield 'N1';
+                yield 'N2';
+            }
+
+            for(let w of WarriorGenerator()){
+                console.log(w)
+            }
+        </script>
+    </body>
+</html>

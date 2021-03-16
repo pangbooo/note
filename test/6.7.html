@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div id="subTree">
+            <form>
+                <input type="text"/>
+            </form>
+            <p>Paragraph</p>
+            <span>Span</span> 
+        </div>
+
+        <script>
+             function* DomTraversal(element){
+                 yield element;
+                 element = element.firstElementChild;
+
+                 while(element){
+                    yield* DomTraversal(element);
+                    element = element.nextElementSibling;
+                 }
+             }
+
+            const subTree = document.getElementById("subTree");
+             for( let i of DomTraversal(subTree)){
+                 console.log(i.nodeName);
+             }
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function* IdGenerator(){
+                let id = 0;
+                while(true){
+                    yield id++;
+                }
+            }
+
+            const idIterator = IdGenerator();
+            console.log(idIterator.next());
+            console.log(idIterator.next());
+            console.log(idIterator.next());
+        </script>
+    </body>
+</html>
