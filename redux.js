@@ -1,6 +1,6 @@
 function createStore(reducer){
     let state = null;
-    const listeners = [];
+    let listeners = [];
     const subscribe = (listener) => listeners.push(listener)
     const dispatch = (action) => {
         state = reducer(state, action);
