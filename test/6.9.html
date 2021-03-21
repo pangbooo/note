@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+             function* NinjaGenerator(){
+                 try{
+                     yield 'Hattori';
+                 }catch(e){
+                     console.log('error',e)
+                 }
+             }
+
+             const ninjaIterator = NinjaGenerator();
+             const result1 = ninjaIterator.next();
+             console.log('result1', result1);
+
+             ninjaIterator.throw("Catch this")
+        </script>
+    </body>
+</html>
+
