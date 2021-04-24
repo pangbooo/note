@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            console.log("At code start");
+            const ninjaDelayedPromise = new Promise((resolve, reject) => {
+                console.log("ninjaDelayedPromise executor");
+                setTimeout(() => {
+                    console.log('Resolving ninjaDelayedPromise')
+                    resolve('Hattori');
+                }, 500)
+            });
+
+            if(ninjaDelayedPromise !== null){
+                console.log('After creating ninjaDelayedPromise')
+            }
+
+            ninjaDelayedPromise.then(res => {
+                if(res === 'Hattori'){
+                    console.log("ninjaDelayedPromise resolve handled with Hattori")
+                }
+            });
+
+
+            const ninjaImmediatePromise = new Promise((resolve, reject) => { 
+                console.log("ninjaImmediatePromise executor. Immediate resolve."); 
+                resolve("Yoshi");
+            });
+
+            ninjaImmediatePromise.then(res => {
+                if(res === 'Yoshi'){
+                    console.log("ninjaImmediatePromise resolve handled with Yoshi")
+                }
+            });
+
+            console.log('At code end');
+
+
+            /* 
+                RESULE: 
+                    At code start
+                    ninjaDelayedPromise executor
+                    After creating ninjaDelayedPromise
+                    ninjaImmediatePromise executor. Immediate resolve.
+                    At code end
+                    ninjaImmediatePromise resolve handled with Yoshi
+                    Resolving ninjaDelayedPromise
+                    ninjaDelayedPromise resolve handled with Hattori
+            **/ 
+            
+        </script>
+    </body>
+</html>

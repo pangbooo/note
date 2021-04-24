@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function Ninja(){
+
+            }
+
+            Ninja.prototype.swingSword = function(){
+                return true
+            }
+
+            const ninja1 = Ninja();
+            console.log('ninja', ninja1);
+
+            const ninja2 = new Ninja();
+            console.log(ninja2,ninja2.swingSword,ninja2.swingSword())
+   
+            
+        </script>
+    </body>
+</html>

@@ -8,11 +8,11 @@
                 yield("Yoshi" + ' (' + imposter + ') ' + action);
              }
 
-             const a = NinjaGenerator('a');
+             const a = NinjaGenerator('a'); //首次传入action
              const result = a.next();
              console.log('result', result)
 
-             const result2 = a.next('b');
+             const result2 = a.next('b'); //传入‘b’ 作为 第一次yidle的返回值 -> imposter
              console.log('result2', result2)
 
         </script>

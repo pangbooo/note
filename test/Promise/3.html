@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function getJson(url){
+                return new Promise((resolve, reject) => {
+                    const request = new XMLHttpRequest();
+                    request.open("GET", url);
+
+                    request.onload = function(){
+                        try{
+                            if(this.status === 200){
+                                resolve(JSON.parse(this.response))
+                            }else{
+                                reject(this.status + " " + this.statusText)
+                            }
+                        }catch(e){
+                            reject(e.message);
+                        }
+                    }
+
+                    request.onerror = function(){
+                        reject(this.status + " " + this.statusText)
+                    }
+
+                    request.send();
+                })
+            }
+
+            getJson('https://lib.baomitu.com/jquery/3.6.0/jquery.js').then(res => {
+                console.log('res', res)
+            }).catch(error => {
+                console.log('error', error)
+            })
+            
+        </script>
+    </body>
+</html>

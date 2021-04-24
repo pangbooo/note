@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            const promise = new Promise((resolve, reject)=> {
+                reject('Explicitly reject a promise!');  // 显式 reject
+            });
+
+            promise.then(
+                (res) => {  console.log('res', res) },
+                (error) => { console.log('A promise was explicitly rejected!') }
+            );
+
+            promise.then(res => {
+                console.log(res)
+            }).catch(error => {
+                console.log(error)
+            });
+
+            const promise2 = new Promise((resolve, reject) => {
+                undeclaredVariable++; // 隐式 reject
+            });
+
+            promise2.then(() => console.log("Happy path, won't be called!")) 
+                    .catch(error => console.log("Third promise was also rejected"));
+            
+        </script>
+    </body>
+</html>
