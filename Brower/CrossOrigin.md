@@ -92,6 +92,51 @@ Origin: http://example.com (*)
 * 整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。
 因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。
 
+NodeJs
+```javascript
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin","*");
+    res.header('Access-Control-Allow-Methods','PUT,GET,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers","X-Requested-With");
+    res.header('Access-Control-Allow-Headers','Content-Type');
+  next();
+});
+```
+
+webpack devServer
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://www.baidu.com/', //target: 请求的中包含/api，代理到http://www.baidu.com/
+        pathRewrite: {'^/api' : ''},
+        changeOrigin: true,     // target是域名的话，需要这个参数，
+        secure: false,          // 设置支持https协议的代理
+      },
+      '/api2': {
+          .....
+      }
+    }
+  }
+};
+```
+
+Axios
+```javascript
+const instance = axios.create({
+ 	baseUrl:’’,
+ 	params:{},
+ 	headers:{},
+ 	timeout: 1000,
+ 	proxy:{
+ 		  protocol: 'https',
+      host: '127.0.0.1',
+      port: 9000,
+ 	}
+})
+```
 参考<br/>
 * https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
 
