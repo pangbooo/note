@@ -14,11 +14,13 @@
 * Browser Process ：负责包括地址栏，书签栏，前进后退按钮等部分的工作；负责处理浏览器的一些不可见的底层操作，比如网络请求和文件访问；
     * UI thread ： 控制浏览器上的按钮及输入框；
     * storage thread: 控制文件等的访问；
-* Render Process
-    * 负责一个 tab 内关于网页呈现的所有事情
-* network Process: 主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，直至最近才独立出来，成为一个单独的进程。
-* Plugin Process
 * GPU Process
+* network Process: 主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，直至最近才独立出来，成为一个单独的进程。
+* Render Process（多个）
+    * 负责一个 tab 内关于网页呈现的所有事情
+* Plugin Process（多个）
+> sandbox(安全沙盒)：Render、Plugin Process 放在安全沙盒里，保护操作系统的恶意操作。
+> IPC: 进程之间是通过 IPC 机制进行通信
 
 ### 1.3 iframe 的渲染 – Site Isolation
 > Site Isolation 机制从 Chrome 67 开始默认启用。这种机制允许在同一个 Tab 下的跨站 iframe 使用单独的进程来渲染，这样会更为安全。
