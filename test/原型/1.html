@@ -3,21 +3,22 @@
     <head></head>
     <body>
         <script>
-            function Ninja(){
-
-            }
+            function Ninja(){}
 
             Ninja.prototype.swingSword = function(){
                 return true
             }
 
             const ninja1 = Ninja();
-            console.log('ninja', ninja1);
+            console.log('ninja1', ninja1);
 
             const ninja2 = new Ninja();
             console.log(ninja2,ninja2.swingSword,ninja2.swingSword())
-   
-            
+            console.log(ninja2.__proto__)
+
+            console.log(Ninja.prototype)
+            console.log(Ninja.prototype.constructor === Ninja)
+
         </script>
     </body>
 </html>

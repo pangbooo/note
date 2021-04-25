@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function Ninja(){
+                this.swung = true
+            }
+
+            const ninja1 = new Ninja();
+
+            Ninja.prototype.swingSword = function(){
+                return this.swung
+            }
+
+            console.log('ninja1.swung', ninja1.swingSword()); //true
+
+            //此处替换了了Ninja的原型，但是ninja1对象还可具有swingSword方法，因为还具有旧的Ninja原型的引用
+            Ninja.prototype = { 
+                pierce: function(){
+                    return true
+                }
+            }
+
+            console.log('ninja1.swung', ninja1.swingSword()); //true
+
+            const ninja2 = new Ninja();
+            console.log(ninja2.pierce()) //true
+            console.log(ninja2.swingSword()) //Uncaught TypeError: ninja2.swingSword is not a function
+        </script>
+    </body>
+</html>

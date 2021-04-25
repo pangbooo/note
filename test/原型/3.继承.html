@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            function Person(){}
+            Person.prototype.dance = function(){}
+
+            function Ninja(){}
+            // Ninja.prototype = {
+            //     dance: Person.prototype.dance
+            // }  这只是复制了dance方法，没有继承原型
+
+            //1)
+            Ninja.prototype = new Person(); //推荐
+            // Ninja.prototype = Person.prototype;
+
+            const ninja = new Ninja();
+            console.log(ninja instanceof Ninja)
+            console.log(ninja instanceof Person)
+            console.log(ninja instanceof Object)
+
+            console.log(ninja.constructor) //Person
+
+            //2)修改 Ninja.prototype.constructor
+            Object.defineProperty(Ninja.prototype, 'constructor', {
+                enumerable: false,
+                value: Ninja,
+                writable: true
+            });
+
+            console.log(ninja.constructor)
+        </script>
+    </body>
+</html>
