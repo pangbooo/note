@@ -69,7 +69,7 @@ Pragma: no-cache;
 1. 第二次发送请求
     1. cache 检查max-age是否过期
     2. 结果: </br>
-       没过期 -> 使用缓存资源(__强缓存__) </br> 
+       没过期 -> 使用缓存资源(__强缓存__) 返回200状态码</br> 
        已过期 -> （__协商缓存__）
         1. 判断 __ETag__
             1) 存在ETag</br> 
@@ -106,9 +106,8 @@ ETag: W/"0815" //弱验证
 * 第一次请求res（响应头） -> Last-Modified </br>
   之后的请求req（请求头） -> If-Modified-Since
 
-
-
-
+## 流程图
+![流程图](https://github.com/pangbooo/note/blob/master/imgs/HttpCache.png)
 
 
 
