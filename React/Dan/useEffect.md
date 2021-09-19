@@ -1,4 +1,4 @@
-## 1.  
+## 1. useEffect
 1. 每次渲染都会生成各自的state，function，和useEffect 
 2. useEffect会在浏览器渲染当次更新之后执行
 3. useRef 是 mutable
