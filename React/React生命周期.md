@@ -78,7 +78,8 @@ __new props__
 #### 反面模式（anti-pattern）
 一个常见误解是，getDerivedStateFormProps和ComponentWillReceiveProps 只有在接受新props才更新，
 而事实是，只要父级组件更新，那么就会触发这个生命周期。
-1. 直接复制props到state
+1. ##### 直接复制props到state
+
 ```javascript
 class EmailInput extends Component {
   state = { email: this.props.email };
@@ -101,7 +102,8 @@ class EmailInput extends Component {
 每次父组件更新，都会触发state更新，导致输入input的value丢失。
 尽管我们去比较nextProps.email !== this.state.email , 都不会避免这个问题。
 
-2. 在 props 变化后修改 state
+2. ##### 在 props 变化后修改 state
+
 ```javascript
 class EmailInput extends Component {
   state = {
@@ -124,18 +126,23 @@ __任何数据，都要保证只有一个数据来源，而且避免直接复制
 
 #### 建议的模式
 从外部组件的角度的可控组件和非可控组件。
-* 可控组件：用props传入数据，组件可以被认为是可控（因为组件被父级传入的props控制）
-* 非可控组件：数据只保存在当前组件的state中。（因为外部没办法直接控制state）
 
-1. 完全可控组件
+可控组件：用props传入数据，组件可以被认为是可控（因为组件被父级传入的props控制）
+
+非可控组件：数据只保存在当前组件的state中。（因为外部没办法直接控制state）
+
+1. ##### 完全可控组件
+
 ```javascript
 function EmailInput(props) {
   return <input onChange={props.onChange} value={props.email} />;
 }
 ```
 
-2. 有key的非可控组件
-另外一个选择是让组件自己存储临时的 email state。在这种情况下，组件仍然可以从 prop 接收“初始值”，但是更改之后的值就和 prop 没关系了
+2. ##### 有key的非可控组件
+
+   另外一个选择是让组件自己存储临时的 email state。在这种情况下，组件仍然可以从 prop 接收“初始值”，但是更改之后的值就和 prop 没关系了
+
 ```javascript
 class EmailInput extends Component {
   state = { email: this.props.defaultEmail };
@@ -158,8 +165,10 @@ class EmailInput extends Component {
 __当 key 变化时， React 会创建一个新的而不是更新一个既有的组件。__ </br>
 每次 ID 更改，都会重新创建 EmailInput ，并将其状态重置为最新的 defaultEmail 值。大部分情况下，这是处理重置 state 的最好的办法。
 
-3. 其他非可控组件选项
-* 选项一：仅更改某些字段，观察特殊属性的变化
+3. ##### 其他非可控组件选项
+
+选项一：仅更改某些字段，观察特殊属性的变化
+
 ```javascript
 class EmailInput extends Component {
   state = {
@@ -181,7 +190,8 @@ class EmailInput extends Component {
 }
 ```
 
-* 选项二：使用 ref 调用实例方法。
+选项二：使用 ref 调用实例方法。
+
 > 父组件使用ref调用 resetEmailForNewUser，重置
 ```javascript
 class EmailInput extends Component {
