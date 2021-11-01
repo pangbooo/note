@@ -1,16 +1,29 @@
 # React生命周期
 1. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
-2. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
-3. [挂载和卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
-4. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
-5. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#错误处理)
-6. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
 
-## 整理流程（16.3之后）
+2. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
+
+3. [挂载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
+
+4. [卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%B8%E8%BD%BD)
+
+5. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
+
+6. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#错误处理)
+
+7. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
+
+   7.1[static getDerivedStateFromProps(props, state)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#static-getderivedstatefrompropsprops-state)
+
+   7.2[shouldComponentUpdate(nextProps, nextState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#shouldcomponentupdatenextprops-nextstate)
+
+   7.3[getSnapshotBeforeUpdate(preProps, preState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#getsnapshotbeforeupdatepreprops-prestate)
+
+## 1. 整理流程（16.3之后）
 ![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)
 ![不常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-2.PNG)
 
-## 升级与变化
+## 2. 生命周期的升级与变化
 ### 新增生命周期
 * static getDerivedStateFromProps()<br/>
   每次render()之前执行
@@ -27,7 +40,7 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 * 16.x: 为 componentWillMount、componentWillReceiveProps 和 componentWillUpdate 启用废弃告警。（旧的生命周期名称和新的别名都将在这个版本中工作，但是旧的名称在开发模式下会产生一个警告。）
 * 17.0: 删除 componentWillMount、componentWillReceiveProps 和 componentWillUpdate。（在此版本之后，只有新的 “UNSAFE_” 生命周期名称可以使用。）
 
-## 挂载
+## 3. 挂载
 > 当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下
 * constructor
 * __static getDerivedStateFromProps(props,state)__
@@ -38,12 +51,12 @@ __注：以下生命周期在React 16.3后已不推荐使用。__
 如果在componentDidMount中setState，组件会在初始化阶段渲染两次。
 
 
-## 卸载
+## 4. 卸载
 * componentWillUnmount
 <br/>
 执行一些清理方法，如事件回收、清除定时器。
 
-## 更新
+## 5. 更新
 ### 16.3之后
 * __static getDerivedStateFromProps()__
 * __shouleComponentUpdate()__
@@ -65,13 +78,13 @@ __new props__
 * render
 * componentDidUpdate()
 
-## 错误处理
+## 6. 错误处理
 * static getDerivedStateFromError()
 * componentDidCatch()
 
-## 生命周期详细
+## 7.生命周期详细
 
-### static getDerivedStateFromProps(props, state)
+### 7.1 static getDerivedStateFromProps(props, state)
 * ```getDerivedStateFromProps```会在render方法之前执行。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
 * getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。
 
@@ -208,7 +221,7 @@ class EmailInput extends Component {
 ```
 refs 在某些情况下很有用，比如这个。但通常我们建议谨慎使用。即使是做一个演示，这个命令式的方法也是非理想的，因为这会导致两次而不是一次渲染。
 
-### shouldComponentUpdate(nextProps, nextState)
+### 7.2 shouldComponentUpdate(nextProps, nextState)
 > 此方法仅作为 __性能优化__ 的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。你应该考虑使用内置的 __PureComponent__ 组件，而不是手动编写。
 
 #### shouldComponentUpdate 的作用
@@ -309,5 +322,5 @@ class WordAdder extends React.Component {
 
 ```
 
-### getSnapshotBeforeUpdate(preProps, preState)
+### 7.3 getSnapshotBeforeUpdate(preProps, preState)
 getSnapshotBeforeUpdate() 在最近一次渲染输出（提交到 DOM 节点）之前调用。
