@@ -1,23 +1,23 @@
 # React生命周期
-1. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
+1. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#1-%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
 
-2. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
+2. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#2-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
 
-3. [挂载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
+3. [挂载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#3-%E6%8C%82%E8%BD%BD)
 
-4. [卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%B8%E8%BD%BD)
+4. [卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#4-%E5%8D%B8%E8%BD%BD)
 
-5. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
+5. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#5-%E6%9B%B4%E6%96%B0)
 
-6. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#错误处理)
+6. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#6-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86)
 
-7. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
+7. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
 
-   7.1[static getDerivedStateFromProps(props, state)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#static-getderivedstatefrompropsprops-state)
+   7.1 [static getDerivedStateFromProps(props, state)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#71-static-getderivedstatefrompropsprops-state)
 
-   7.2[shouldComponentUpdate(nextProps, nextState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#shouldcomponentupdatenextprops-nextstate)
+   7.2 [shouldComponentUpdate(nextProps, nextState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#72-shouldcomponentupdatenextprops-nextstate)
 
-   7.3[getSnapshotBeforeUpdate(preProps, preState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#getsnapshotbeforeupdatepreprops-prestate)
+   7.3 [getSnapshotBeforeUpdate(preProps, preState)](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#73-getsnapshotbeforeupdatepreprops-prestate)
 
 ## 1. 整理流程（16.3之后）
 ![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)

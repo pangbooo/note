@@ -61,35 +61,3 @@ function updateChildren(nextNestedChildrenElements, transaction, context) {
 ## 3. React Patch方法
 > 将tree diff计算出来的DOM差异队列更新到真实的DOM上，最终让浏览器渲染出更新的数据。
 通过浏览器遍历差异队列实现。通过更新类型进行相应的操作，插入、移动、删除节点。
-
-# React Fiber
-* Fiber 的中文翻译叫纤程，与进程、线程同为程序执行过程，Fiber 就是比线程还要纤细的一个过程。纤程意在对渲染过程实现进行更加精细的控制。
-* 从架构角度来看，Fiber 是对 React 核心算法（即调和过程）的重写。
-* 从编码角度来看，Fiber 是 React 内部所定义的一种数据结构，它是 Fiber 树结构的节点单位，也就是 React 16 新架构下的"虚拟 DOM"。(一个 fiber 就是一个 JavaScript 对象)
-
-
-## Fiber的两个阶段
-* render/reconciliation
-* commit
-
-
-### render/reconciliation 协调阶段(可中断/异步)
-#### "递阶段"
-> 在协调阶段会进行 Diff 计算，会生成一棵 Fiber 树。
-
-1. 首先从rootFiber开始向下深度优先遍历。为遍历到的每个Fiber节点调用```beginWork```方法 (该方法会根据传入的Fiber节点创建子Fiber节点，并将这两个Fiber节点连接起来。)
-2. 当遍历到叶子节点（即没有子组件的组件）时就会进入“归”阶段。
-
-#### "归阶段"
-> 在“归”阶段会调用completeWork处理Fiber节点。
-
-* 当某个Fiber节点执行完```completeWork```，如果其存在兄弟Fiber节点（即fiber.sibling !== null），会进入其兄弟Fiber的“递”阶段。
-* 如果不存在兄弟Fiber，会进入父级Fiber的“归”阶段。
-* “递”和“归”阶段会交错执行直到“归”到rootFiber。至此，render阶段的工作就结束了。
-
-## commit 提交阶段(不可中断/同步)
-> commit 阶段的主要工作（即 Renderer 的工作流程）分为三部分：
-
-1. before mutation 阶段，这个阶段 DOM 节点还没有被渲染到界面上去，过程中会触发```getSnapshotBeforeUpdate```，也会处理 ```useEffect``` 钩子相关的调度逻辑。
-2. mutation 阶段，这个阶段负责 DOM 节点的渲染。在渲染过程中，会遍历 effectList，根据 flags（effectTag）的不同，执行不同的 DOM 操作。
-3. layout 阶段，这个阶段处理 DOM 渲染完毕之后的收尾逻辑。比如调用 ```componentDidMount/componentDidUpdate```，调用 ```useLayoutEffect``` 钩子函数的回调等。除了这些之外，它还会把 fiberRoot 的 current 指针指向 workInProgress Fiber 树。
