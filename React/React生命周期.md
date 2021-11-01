@@ -1,10 +1,14 @@
 # React生命周期
-1. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
-2. [挂载和卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
-3. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
-4. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#错误处理)
-5. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
+1. [整体流程](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%95%B4%E7%90%86%E6%B5%81%E7%A8%8B163%E4%B9%8B%E5%90%8E)
+2. [生命周期的升级与变化](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%8F%98%E5%8C%96)
+3. [挂载和卸载](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%8C%82%E8%BD%BD)
+4. [更新](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E6%9B%B4%E6%96%B0)
+5. [错误处理](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#错误处理)
 6. [生命周期详细](https://github.com/pangbooo/note/blob/master/React/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E7%BB%86)
+
+### 整理流程（16.3之后）
+![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)
+![不常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-2.PNG)
 
 ### 升级与变化
 #### 新增生命周期
@@ -65,13 +69,136 @@ __new props__
 * static getDerivedStateFromError()
 * componentDidCatch()
 
-### 整理流程（16.3之后）
-![常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-1.PNG)
-![不常用生命周期](https://github.com/pangbooo/note/blob/master/imgs/react-lifecycle-2.PNG)
-
-
 ### 生命周期详细
-* #### shouldComponentUpdate(nextProps, nextState)
+
+#### static getDerivedStateFromProps(props, state)
+* ```getDerivedStateFromProps```会在render方法之前执行。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+* getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。
+
+##### 反面模式（anti-pattern）
+一个常见误解是，getDerivedStateFormProps和ComponentWillReceiveProps 只有在接受新props才更新，
+而事实是，只要父级组件更新，那么就会触发这个生命周期。
+1. 直接复制props到state
+```javascript
+class EmailInput extends Component {
+  state = { email: this.props.email };
+
+  render() {
+    return <input onChange={this.handleChange} value={this.state.email} />;
+  }
+
+  handleChange = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    // 这会覆盖所有组件内的 state 更新！
+    // 不要这样做。
+    this.setState({ email: nextProps.email });
+  }
+}
+```
+每次父组件更新，都会触发state更新，导致输入input的value丢失。
+尽管我们去比较nextProps.email !== this.state.email , 都不会避免这个问题。
+
+2. 在 props 变化后修改 state
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.email
+  };
+
+  componentWillReceiveProps(nextProps) {
+    // 只要 props.email 改变，就改变 state
+    if (nextProps.email !== this.props.email) {
+      this.setState({
+        email: nextProps.email
+      });
+    }
+  }
+  
+  // ...
+}
+```
+__任何数据，都要保证只有一个数据来源，而且避免直接复制它。__
+
+##### 建议的模式
+从外部组件的角度的可控组件和非可控组件。
+* 可控组件：用props传入数据，组件可以被认为是可控（因为组件被父级传入的props控制）
+* 非可控组件：数据只保存在当前组件的state中。（因为外部没办法直接控制state）
+
+1. 完全可控组件
+```javascript
+function EmailInput(props) {
+  return <input onChange={props.onChange} value={props.email} />;
+}
+```
+
+2. 有key的非可控组件
+另外一个选择是让组件自己存储临时的 email state。在这种情况下，组件仍然可以从 prop 接收“初始值”，但是更改之后的值就和 prop 没关系了
+```javascript
+class EmailInput extends Component {
+  state = { email: this.props.defaultEmail };
+
+  handleChange = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  render() {
+    return <input onChange={this.handleChange} value={this.state.email} />;
+  }
+}
+```
+```javascript
+<EmailInput
+  defaultEmail={this.props.user.email}
+  key={this.props.user.id}
+/>
+```
+__当 key 变化时， React 会创建一个新的而不是更新一个既有的组件。__ </br>
+每次 ID 更改，都会重新创建 EmailInput ，并将其状态重置为最新的 defaultEmail 值。大部分情况下，这是处理重置 state 的最好的办法。
+
+3. 其他非可控组件选项
+* 选项一：仅更改某些字段，观察特殊属性的变化
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.defaultEmail,
+    prevPropsUserID: this.props.userID
+  }
+
+  static getDerivedStateFromProps (props, state){
+    if(props.userID !== state.prevPropsUserID) {
+      return {
+        email: props.defaultEmail,
+        prevPropsUserID: props.userID
+      }
+    }
+
+    return null;
+  }
+
+}
+```
+
+* 选项二：使用 ref 调用实例方法。
+> 父组件使用ref调用 resetEmailForNewUser，重置
+```javascript
+class EmailInput extends Component {
+  state = {
+    email: this.props.defaultEmail
+  };
+
+  resetEmailForNewUser(newEmail) {
+    this.setState({ email: newEmail });
+  }
+
+  // ...
+}
+```
+refs 在某些情况下很有用，比如这个。但通常我们建议谨慎使用。即使是做一个演示，这个命令式的方法也是非理想的，因为这会导致两次而不是一次渲染。
+
+#### shouldComponentUpdate(nextProps, nextState)
 > 此方法仅作为 __性能优化__ 的方式而存在。不要企图依靠此方法来“阻止”渲染，因为这可能会产生 bug。你应该考虑使用内置的 __PureComponent__ 组件，而不是手动编写。
 
 ##### shouldComponentUpdate 的作用
@@ -172,130 +299,8 @@ class WordAdder extends React.Component {
 
 ```
 
-* #### static getDerivedStateFromProps()
-> 它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
-getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。</br>
-一个常见误解是，getDerivedStateFormProps和ComponentWillReceiveProps 只有在接受新props才更新，
-而__事实是__，只要父级组件更新，那么就会触发这个生命周期。
-
-
-* 派生模式（Derived State）
-* 反面模式（anti-pattern）
-1. 直接复制props到state
-```javascript
-class EmailInput extends Component {
-  state = { email: this.props.email };
-
-  render() {
-    return <input onChange={this.handleChange} value={this.state.email} />;
-  }
-
-  handleChange = event => {
-    this.setState({ email: event.target.value });
-  };
-
-  componentWillReceiveProps(nextProps) {
-    // 这会覆盖所有组件内的 state 更新！
-    // 不要这样做。
-    this.setState({ email: nextProps.email });
-  }
-}
-```
-每次父组件更新，都会触发state更新，导致输入input的value丢失。
-尽管我们去比较nextProps.email !== this.state.email , 都不会避免这个问题。
-
-2. 在 props 变化后修改 state
-```javascript
-class EmailInput extends Component {
-  state = {
-    email: this.props.email
-  };
-
-  componentWillReceiveProps(nextProps) {
-    // 只要 props.email 改变，就改变 state
-    if (nextProps.email !== this.props.email) {
-      this.setState({
-        email: nextProps.email
-      });
-    }
-  }
-  
-  // ...
-}
-```
-
-* 建议的模式
-1. 完全可控组件
-```javascript
-function EmailInput(props) {
-  return <input onChange={props.onChange} value={props.email} />;
-}
-```
-
-2. 有key的非可控组件
-> 另外一个选择是让组件自己存储临时的 email state。在这种情况下，组件仍然可以从 prop 接收“初始值”，但是更改之后的值就和 prop 没关系了
-```javascript
-class EmailInput extends Component {
-  state = { email: this.props.defaultEmail };
-
-  handleChange = event => {
-    this.setState({ email: event.target.value });
-  };
-
-  render() {
-    return <input onChange={this.handleChange} value={this.state.email} />;
-  }
-}
-```
-```javascript
-<EmailInput
-  defaultEmail={this.props.user.email}
-  key={this.props.user.id}
-/>
-```
-__当 key 变化时， React 会创建一个新的而不是更新一个既有的组件。__ </br>
-每次 ID 更改，都会重新创建 EmailInput ，并将其状态重置为最新的 defaultEmail 值。
-
-3. 其他
-##### 选项一：用 prop 的 ID 重置非受控组件
-```javascript
-class EmailInput extends Component {
-  state = {
-    email: this.props.defaultEmail,
-    prevPropsUserID: this.props.userID
-  }
-
-  static getDerivedStateFromProps (props, state){
-    if(props.userID !== state.prevPropsUserID) {
-      return {
-        email: props.defaultEmail,
-        prevPropsUserID: props.userID
-      }
-    }
-
-    return null;
-  }
-
-}
-```
-
-##### 选项二：使用实例方法重置非受控组件
-> 父组件使用ref调用 resetEmailForNewUser，重置
-```javascript
-class EmailInput extends Component {
-  state = {
-    email: this.props.defaultEmail
-  };
-
-  resetEmailForNewUser(newEmail) {
-    this.setState({ email: newEmail });
-  }
-
-  // ...
-}
-```
-refs 在某些情况下很有用，比如这个。但通常我们建议谨慎使用。即使是做一个演示，这个命令式的方法也是非理想的，因为这会导致两次而不是一次渲染。
-* #### getSnapshotBeforeUpdate()
 
 
 
+#### getSnapshotBeforeUpdate(preProps, preState)
+getSnapshotBeforeUpdate() 在最近一次渲染输出（提交到 DOM 节点）之前调用。
