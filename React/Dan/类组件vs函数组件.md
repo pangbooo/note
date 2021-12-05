@@ -1,6 +1,6 @@
-## 1.  捕获数据
-
-* 类组件获取当前props的值（ props是immutable；this是mutable）
+## 1.  capture value (捕获数据, 数据的快照)
+函数式组件捕获了渲染所使用的值。
+* 类组件获取当前props的值（原因： props是immutable；this是mutable，每次都获取到最新的this）
 * 函数组件可以捕获每次渲染的数据 （props是immutable; 函数闭包实现）
 
 ```javascript
@@ -85,4 +85,6 @@ function MessageThread() {
     alert('You said: ' + latestMessage.current);
 };
 ```
+
+> 代码参考：https://github.com/pangbooo/react/blob/90c14c4b809136d9cedb59f7897e7c15f376769d/2019/my-app-16/src/pages/CaptureValue/index.js
 
