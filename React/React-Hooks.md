@@ -40,7 +40,7 @@ immutableString = immutableString + 'World';
 4. “immutableString”对象现在指向新创建的内存空间
 5. 以前创建的内存空间现在可用于垃圾收集。
 
-3. ## 清除effect
+## 3. 清除effect
 为了防止内存泄漏，清除函数会在组件卸载浅执行。另外，如果组件多次渲染（普遍如此），那么在执行下一个effect之前，上一个effect就已经被清除。
 
 
