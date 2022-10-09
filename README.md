@@ -10,6 +10,8 @@
 * #### [React升级](https://github.com/pangbooo/note/blob/master/React/React升级.md)
 * #### [diff算法](https://github.com/pangbooo/note/blob/master/React/diff算法.md)
 * #### [性能优化](https://github.com/pangbooo/note/blob/master/React/React性能优化.md)
+* #### [diff算法-2022](https://github.com/pangbooo/note/blob/master/React/2022/diff算法.md)
+* #### [setState](https://github.com/pangbooo/note/blob/master/React/2022/setState.md)
 
 ### 浏览器
 * #### HTTP
