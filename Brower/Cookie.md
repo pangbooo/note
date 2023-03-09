@@ -48,7 +48,20 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
 * __Domain__ 属性指定浏览器发出 HTTP 请求时，哪些域名要附带这个 Cookie；
     * 如果没有指定该属性，浏览器会默认将其设为当前域名，这时子域名将不会附带这个 Cookie。
     * 如果指定了domain属性，那么子域名也会附带这个 Cookie。
-* __Path__ 属性指定浏览器发出 HTTP 请求时，哪些路径要附带这个 Cookie。
+* __Path__ 指定了一个 URL 路径，该 URL 路径必须存在于请求的 URL中，以便发送 Cookie 标头。以字符 %x2F (“/”) 作为路径分隔符，并且子路径也会被匹配。
+
+    * 设置 Path=/docs，则以下地址都会匹配：
+        * /docs
+        * /docs/
+        * /docs/Web/
+        * /docs/Web/HTTP
+
+    * 但是这些请求路径不会匹配以下地址：
+        * /
+        * /docsets
+        * /fr/docs
+
+
 
 ### 3.3 Secure，HttpOnly
 * __Secure__ 属性指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器。
@@ -56,10 +69,10 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
 
 
 ### 3.4 SameSite
-Chrome 51 开始，浏览器的 Cookie 新增加了一个SameSite属性，用来防止 CSRF 攻击和用户追踪。
-* Strict
-* Lax
-* None
+SameSite 属性允许服务器指定是否/何时通过跨站点请求发送
+* Strict (cookie只发送到他的来源站点)
+* Lax （SameSite的默认值。和Strick相似，只在用户导航到cookie的源站点是发送cookie）
+* None（指定浏览器会在同站请求和跨站请求发送cookie，单必须设置属性```Secure```）
 
 ### 3.5 document.cookie
 * 写入<br/>
@@ -72,6 +85,12 @@ document.cookie = 'test2=world';
 ```
 document.cookie = 'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
 ```
+
+## 4. 安全
+缓解涉及 Cookie 的攻击的方法：
+
+* 使用 HttpOnly 属性可防止通过 JavaScript 访问 cookie 值。
+* 用于敏感信息（例如指示身份验证）的 Cookie 的生存期应较短，并且 SameSite 属性设置为 Strict 或 Lax。（请参见上方的 SameSite 属性。）在支持 SameSite 的浏览器中，这样做的作用是确保不与跨站点请求一起发送身份验证 cookie。因此，这种请求实际上不会向应用服务器进行身份验证。
 
 参考<br/>
 * Cookie<br/>
