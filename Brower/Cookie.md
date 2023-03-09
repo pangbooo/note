@@ -4,17 +4,13 @@
 3. [Cookie 的属性](https://github.com/pangbooo/note/blob/master/Brower/Cookie.md#3cookie-%E7%9A%84%E5%B1%9E%E6%80%A7)
 
 ## 1.概述
-* 每个 Cookie 都有以下几方面的元数据。
-    * Cookie 的名字
-    * Cookie 的值（真正的数据写在这里面）
-    * 到期时间（超过这个时间会失效）
-    * 所属域名（默认为当前域名）
-    * 生效的路径（默认为当前网址）
-> 浏览器的同源政策规定，两个网址只要域名相同，就可以共享 Cookie（参见《同源政策》一章）。注意，这里不要求协议相同。也就是说，http://example.com设置的 Cookie，可以被https://example.com读取。
+HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据。浏览器会存储 cookie 并在下次向同一服务器再发起请求时携带并发送到服务器上。
+
 
 ## 2.Cookie 与 HTTP 协议
 > Cookie 由 HTTP 协议生成，也主要是供 HTTP 协议使用。
 ### 2.1 HTTP Response：Cookie 的生成
+通过```Set-Cookie```响应头设置Cookie
 ```
 HTTP/1.0 200 OK
 Content-type: text/html
@@ -22,7 +18,7 @@ Set-Cookie: yummy_cookie=choco
 Set-Cookie: tasty_cookie=strawberry
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 ```
-如果服务器想改变一个早先设置的 Cookie，必须同时满足四个条件：Cookie 的key、domain、path和secure都匹配。
+现在，对该服务器发起的每一次新请求，浏览器都会将之前保存的 Cookie 信息通过 Cookie 请求头部再发送给服务器。
 
 ### 2.2 HTTP 请求：Cookie 的发送
 浏览器向服务器发送 HTTP 请求时，每个请求都会带上相应的 Cookie。也就是说，把服务器早前保存在浏览器的这段信息，再发回服务器。这时要使用 HTTP 头信息的Cookie字段。
@@ -34,6 +30,13 @@ Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 >
 
 ## 3.Cookie 的属性
+每个 Cookie 都有以下几方面的元数据。
+* Cookie 的名字
+* Cookie 的值（真正的数据写在这里面）
+* 到期时间（超过这个时间会失效）
+* 所属域名（默认为当前域名）
+* 生效的路径（默认为当前网址）
+> 浏览器的同源政策规定，两个网址只要域名相同，就可以共享 Cookie（参见《同源政策》一章）。注意，这里不要求协议相同。也就是说，http://example.com 设置的 Cookie，可以被https://example.com读取。
 ### 3.1 Expires，Max-Age
 ```
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
