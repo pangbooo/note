@@ -17,7 +17,7 @@
 * #### HTTP
 * #### [Cookie](https://github.com/pangbooo/note/blob/master/Brower/Cookie.md)
 * #### [同源政策及其规避方法](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md)
-* #### CORS
+* #### [CORS](https://github.com/pangbooo/note/blob/master/Brower/CORS.md)
 * #### [JWT](https://github.com/pangbooo/note/blob/master/Brower/JWT.md)
 * #### [浏览器的工作原理](https://github.com/pangbooo/note/blob/master/Brower/浏览器的工作原理.md)
 
