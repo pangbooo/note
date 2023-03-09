@@ -19,7 +19,7 @@
         * multipart/form-data
         * text-plain
 
-#### 简单请求基本流程
+#### 1.1 简单请求基本流程
 浏览器在请求头增加一个```Origin```字段。用来说明本次请求来自哪个源。服务器根据这个值决定是否同意这次请求。
 
 * Request
@@ -49,7 +49,7 @@ Content-Type: text/html; charset=utf-8
 #### Access-Control-Expose-Headers
 该字段可选。CORS请求时，```XMLHttpRequest```对象的```getResponseHeader()```方法只能拿到6个基本字段：```Cache-Control```、```Content-Language```、```Content-Type```、```Expires```、```Last-Modified```、```Pragma```。如果想拿到其他字段，就必须在```Access-Control-Expose-Headers里面指定```。上面的例子指定，```getResponseHeader('FooBar')```可以返回FooBar字段的值。
 
-#### withCredentials属性
+#### 1.2 withCredentials属性
 配合```response```使用```Access-Control-Allow-Credentials```,AJAX在请求中需要配置```withCredentials```属性
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -95,7 +95,6 @@ Content-Type: text/plain
 ```
 XMLHttpRequest cannot load http://api.alice.com.
 Origin http://api.bob.com is not allowed by Access-Control-Allow-Origin.
-
 ```
 
 #### 2.3 正式请求
