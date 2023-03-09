@@ -36,7 +36,6 @@ Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 * 到期时间（超过这个时间会失效）
 * 所属域名（默认为当前域名）
 * 生效的路径（默认为当前网址）
-> 浏览器的同源政策规定，两个网址只要域名相同，就可以共享 Cookie（参见《同源政策》一章）。注意，这里不要求协议相同。也就是说，http://example.com 设置的 Cookie，可以被https://example.com读取。
 ### 3.1 Expires，Max-Age
 ```
 Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
@@ -91,6 +90,10 @@ document.cookie = 'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
 
 * 使用 HttpOnly 属性可防止通过 JavaScript 访问 cookie 值。
 * 用于敏感信息（例如指示身份验证）的 Cookie 的生存期应较短，并且 SameSite 属性设置为 Strict 或 Lax。（请参见上方的 SameSite 属性。）在支持 SameSite 的浏览器中，这样做的作用是确保不与跨站点请求一起发送身份验证 cookie。因此，这种请求实际上不会向应用服务器进行身份验证。
+
+## 5. 限制
+* 浏览器的同源政策规定，两个网址只要 __域名__ 相同，就可以共享 Cookie（参见《同源政策》一章）。注意，这里不要求协议相同。也就是说，http://example.com 设置的 Cookie，可以被https://example.com读取。
+* 浏览器对cookie有大小和数量的限制。通常cookie大小不超过4096个字节，数量不超过300
 
 参考<br/>
 * Cookie<br/>

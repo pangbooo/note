@@ -12,19 +12,19 @@ http://www.example.com/dir/page.html
 - 域名： www.example.com
 - 端口： 默认80
 
-2）限制范围
+2）__限制范围__
 - Cookie, LocalStorage, IndexDB 无法读取
 - DOM 无法获取
 - AJAX 请求不能发送
 
 ## 2. Cookie
-Cookie 默认只有同源的网页才可以共享。
+Cookie 默认只有同域名的网页才可以共享。
 ```javascript
 HTTP/1.0 200 OK
 Content-type: text/html
-Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;Domain=example.com; path=/blog Secure; HttpOnly
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;Domain=example.com; path=/ Secure; HttpOnly
 ```
-* __一级域名__ 服务端设置Domain=example.com，则子域名（w1.exapmle.com）都可以访问cookie
+* __一级域名__ 服务端设置Domain=example.com，则子域名（w1.exapmle.com，w2.example.com）都可以访问cookie
 * __子域名__（w1.exapmle.com、w2.exapmle.com）同时设置相同的Domain=example.com,两个网页就可以共享Cookie。
 
 ## 3. iframe
