@@ -109,5 +109,8 @@ ETag: W/"0815" //弱验证
 ## 流程图
 ![流程图](https://github.com/pangbooo/note/blob/master/imgs/HttpCache.png)
 
+## 其他
+https://github.com/yiliang114/Blog/issues/6
+
 
 
