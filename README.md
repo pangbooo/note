@@ -14,7 +14,7 @@
 * #### [setState](https://github.com/pangbooo/note/blob/master/React/2022/setState.md)
 
 ### 浏览器
-* #### HTTP
+* #### [Http缓存](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http缓存.md)
 * #### [Cookie](https://github.com/pangbooo/note/blob/master/Brower/Cookie.md)
 * #### [同源政策及其规避方法](https://github.com/pangbooo/note/blob/master/Brower/CrossOrigin.md)
 * #### [CORS](https://github.com/pangbooo/note/blob/master/Brower/CORS.md)
