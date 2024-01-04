@@ -11,9 +11,8 @@
    - [3.1 缓存驱逐](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#31-%E7%BC%93%E5%AD%98%E9%A9%B1%E9%80%90)
    - [3.2 改进资源](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#32-%E6%94%B9%E8%BF%9B%E8%B5%84%E6%BA%90)
 4. [缓存验证](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#4-%E7%BC%93%E5%AD%98%E9%AA%8C%E8%AF%81)
-   - [4.1 缓存验证时机](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#41-%E7%BC%93%E5%AD%98%E9%AA%8C%E8%AF%81%E6%97%B6%E6%9C%BA)
-   - [4.2 If-Modified-Since（弱验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#42-if-modified-since%E5%BC%B1%E9%AA%8C%E8%AF%81)
-   - [4.3 ETag（强验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#43-etag%E5%BC%BA%E9%AA%8C%E8%AF%81)
+   - [4.1 If-Modified-Since（弱验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#42-if-modified-since%E5%BC%B1%E9%AA%8C%E8%AF%81)
+   - [4.2 ETag（强验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#43-etag%E5%BC%BA%E9%AA%8C%E8%AF%81)
 5. [请求折叠](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#5-%E8%AF%B7%E6%B1%82%E6%8A%98%E5%8F%A0)
 6. [常见的缓存模式](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#6-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F)
 
@@ -65,7 +64,8 @@ Catch-Control: private
   - 表示资源能够被缓存（保持新鲜）的最大时间
 
 - must-revalidate
-  - 当使用了 "must-revalidate" 指令，那就意味着缓存在考虑使用一个陈旧的资源时，必须先验证它的状态，已过期的缓存将不被使用。详情看下文关于缓存校验的内容。
+  - 当使用了 "must-revalidate" 指令，那就意味着缓存在考虑使用一个陈旧的资源时，必须先验证它的状态，已过期的缓存将不被使用
+  - max-age=0 和 must-revalidate 的组合与 no-cache 具有相同的含义。
 
 ```
 Cache-Control: private;
@@ -147,13 +147,7 @@ Cache-Control: max-age=31536000;
 
 ```
 
-### 4.1 缓存验证时机
-
-1. 浏览器刷新
-2. `Cache-control: must-revalidate`<br/>
-   当缓存的文档过期后，需要进行缓存验证或者重新获取资源。只有在服务器返回 **强校验器或者弱校验器** 时才会进行验证。
-
-### 4.2 If-Modified-Since（弱验证）
+### 4.1 If-Modified-Since（弱验证）
 
 弱验证是因为它只能精确到一秒 。
 
@@ -198,7 +192,7 @@ Cache-Control: max-age=3600
 
 为了解决这些问题，ETag 响应标头被标准化作为替代方案。
 
-### 4.3 ETag（强验证）
+### 4.2 ETag（强验证）
 
 **ETag 响应标头**的值是服务器生成的任意值。服务器对于生成值没有任何限制，因此服务器可以根据他们选择的任何方式自由设置值——例如主体内容的哈希或版本号。<br />
 
