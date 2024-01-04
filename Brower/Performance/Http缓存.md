@@ -5,14 +5,22 @@
    - [1.2 (共享)代理缓存](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#12-%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%90%86%E7%BC%93%E5%AD%98)
 2. [缓存控制](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#2-%E7%BC%93%E5%AD%98%E6%8E%A7%E5%88%B6)
    - [2.1 Cache-Control](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#21-cache-control)
-   - [2.2 Pragma 头](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#22-pragma-%E5%A4%B4)
+   - [2.2 Expires](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#22-expires)
+   - [2.3 Pragma 头](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#22-pragma-%E5%A4%B4)
 3. [新鲜度](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#3-%E6%96%B0%E9%B2%9C%E5%BA%A6)
    - [3.1 缓存驱逐](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#31-%E7%BC%93%E5%AD%98%E9%A9%B1%E9%80%90)
    - [3.2 改进资源](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#32-%E6%94%B9%E8%BF%9B%E8%B5%84%E6%BA%90)
 4. [缓存验证](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#4-%E7%BC%93%E5%AD%98%E9%AA%8C%E8%AF%81)
    - [4.1 缓存验证时机](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#41-%E7%BC%93%E5%AD%98%E9%AA%8C%E8%AF%81%E6%97%B6%E6%9C%BA)
-   - [4.2 强验证](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#42-%E5%BC%BA%E9%AA%8C%E8%AF%81)
-   - [4.3 弱验证](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#43-%E5%BC%B1%E9%AA%8C%E8%AF%81)
+   - [4.2 If-Modified-Since（弱验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#42-if-modified-since%E5%BC%B1%E9%AA%8C%E8%AF%81)
+   - [4.3 ETag（强验证）](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#43-etag%E5%BC%BA%E9%AA%8C%E8%AF%81)
+5. [请求折叠](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#5-%E8%AF%B7%E6%B1%82%E6%8A%98%E5%8F%A0)
+6. [常见的缓存模式](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#6-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F)
+
+- [6.1 默认设置](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#61-%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE)
+- [6.2 缓存破坏](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#62-%E7%BC%93%E5%AD%98%E7%A0%B4%E5%9D%8F)
+- [6.3 验证响应](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#63-%E9%AA%8C%E8%AF%81%E5%93%8D%E5%BA%94)
+- [6.4 主资源](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#64-%E4%B8%BB%E8%B5%84%E6%BA%90)
 
 > 通过复用以前获取的资源，可以显著提高网站和应用程序的性能。Web 缓存减少了等待时间和网络流量，因此减少了显示资源表示形式所需的时间。通过使用 HTTP 缓存，变得更加响应性。
 
@@ -303,10 +311,7 @@ ETag: AAPuIbAOdvAGEETbgAAAAAAABAAE
 Set-Cookie: __Host-SID=AHNtAyt3fvJrUL5g5tnGwER; Secure; Path=/; HttpOnlys
 ```
 
-## 流程图
-
-![流程图](https://github.com/pangbooo/note/blob/master/imgs/HttpCache.png)
-
 ## 参考
 
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching
+https://github.com/peng-yin/note/issues/69
