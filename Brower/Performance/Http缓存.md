@@ -17,10 +17,10 @@
 5. [请求折叠](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#5-%E8%AF%B7%E6%B1%82%E6%8A%98%E5%8F%A0)
 6. [常见的缓存模式](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#6-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F)
 
-- [6.1 默认设置](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#61-%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE)
-- [6.2 缓存破坏](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#62-%E7%BC%93%E5%AD%98%E7%A0%B4%E5%9D%8F)
-- [6.3 验证响应](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#63-%E9%AA%8C%E8%AF%81%E5%93%8D%E5%BA%94)
-- [6.4 主资源](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#64-%E4%B8%BB%E8%B5%84%E6%BA%90)
+   - [6.1 默认设置](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#61-%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE)
+   - [6.2 缓存破坏](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#62-%E7%BC%93%E5%AD%98%E7%A0%B4%E5%9D%8F)
+   - [6.3 验证响应](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#63-%E9%AA%8C%E8%AF%81%E5%93%8D%E5%BA%94)
+   - [6.4 主资源](https://github.com/pangbooo/note/blob/master/Brower/Performance/Http%E7%BC%93%E5%AD%98.md#64-%E4%B8%BB%E8%B5%84%E6%BA%90)
 
 > 通过复用以前获取的资源，可以显著提高网站和应用程序的性能。Web 缓存减少了等待时间和网络流量，因此减少了显示资源表示形式所需的时间。通过使用 HTTP 缓存，变得更加响应性。
 
